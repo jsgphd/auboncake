@@ -834,156 +834,8 @@ url("static.wixstatic.com/ufonts/993276_e3cc5bf8b5464eedbc13549e35e5151b/ttf/fil
 <script type="application/ld+json" id="standalone-seo-business">{"@context":"https://schema.org","@type":"Bakery","@id":"https://jsgphd.github.io/auboncake/#business","name":"Au Bon Cake","url":"https://jsgphd.github.io/auboncake/","image":"https://jsgphd.github.io/auboncake/assets/images/image-135.png","description":"Artistic, certified kosher custom cakes and cookies in Miami Beach, FL.","telephone":"+1-215-802-2253","areaServed":{"@type":"City","name":"Miami Beach","addressRegion":"FL","addressCountry":"US"},"servesCuisine":"Kosher desserts","priceRange":"$$","sameAs":[]}</script>
 <script type="application/ld+json" id="standalone-seo-page">{"@context":"https://schema.org","@type":"CollectionPage","@id":"https://jsgphd.github.io/auboncake/minis.html#webpage","url":"https://jsgphd.github.io/auboncake/minis.html","name":"Kosher Mini Desserts & Cupcakes | Au Bon Cake | Miami Beach","description":"Custom kosher mini desserts, cupcakes, cake pops, and chocolate mousse by Au Bon Cake in Miami Beach, FL.","isPartOf":{"@id":"https://jsgphd.github.io/auboncake/#website"},"about":{"@id":"https://jsgphd.github.io/auboncake/#business"},"primaryImageOfPage":{"@type":"ImageObject","url":"https://jsgphd.github.io/auboncake/assets/images/image-135.png"}}</script>
 <meta name="standalone-site" content="1">
-<style id="standalone-site-css">
-  /* Ensure header/menu visible without Wix runtime */
-  #SITE_HEADER, header, [data-testid="site-header"] { display: block !important; visibility: visible !important; }
-  #SITE_CONTAINER, #site-root, #masterPage, #PAGES_CONTAINER, #SITE_PAGES { visibility: visible !important; opacity: 1 !important; }
-  /* Galleries dropdown */
-  li.wixui-dropdown-menu__item { position: relative !important; overflow: visible !important; }
-  li.wixui-dropdown-menu__item > ul {
-    display: none !important; position: absolute !important; top: 100% !important; left: 0 !important;
-    z-index: 99999 !important; min-width: 220px !important; margin: 0 !important; padding: 8px 0 !important;
-    list-style: none !important; background: #fff !important; border: 1px solid rgba(0,0,0,.12) !important;
-    box-shadow: 0 8px 24px rgba(0,0,0,.12) !important;
-  }
-  li.wixui-dropdown-menu__item:hover > ul,
-  li.wixui-dropdown-menu__item:focus-within > ul,
-  li.wixui-dropdown-menu__item.is-open > ul { display: block !important; }
-  li.wixui-dropdown-menu__item > ul > li > a {
-    display: block !important; padding: 8px 18px !important; color: #222 !important;
-    text-decoration: none !important; white-space: nowrap !important;
-    font: 14px/1.3 Arial, Helvetica, sans-serif !important;
-  }
-  li.wixui-dropdown-menu__item > ul > li > a:hover { background: #f3f3f3 !important; }
-  #comp-kkld2ygi, #comp-kkld2yginavContainer, #comp-kkld2ygiitemsContainer,
-  #comp-kkld2ygi1, #comp-kkld2xkm, #comp-kkld2xkm1, #comp-kkld2xko,
-  [data-mesh-id*="kkld2"], nav, .wixui-dropdown-menu, .NSbBgP {
-    overflow: visible !important;
-  }
-  /* Hide email subscribe form (footer) for now */
-  #comp-kklhs8nu, #comp-kklhs8o4,
-  #comp-kklhs8p8, #comp-kklhs8pn, #comp-kklhs8q6, #comp-kklhs8qj {
-    display: none !important;
-    visibility: hidden !important;
-    height: 0 !important;
-    overflow: hidden !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    pointer-events: none !important;
-  }
 
-  /* Hide "More" menu item */
-  #comp-kkld2ygi__more__,
-  li[id$="__more__"] {
-    display: none !important;
-  }
-</style>
-
-<style id="standalone-images-fix">
-  /* Wix hides media until its JS hydrates — force visible for static hosting */
-  img, picture, video,
-  .gallery-item, .gallery-item-visible, .gallery-item-preloaded,
-  .gRkIq0, .sFiSiq, .UQYcWy, .Kv1aVt, .MW5IWV,
-  [data-testid="imageX"], [data-hook="gallery-item-image-img"],
-  .l7_2fn, .imageItem {
-    opacity: 1 !important;
-    visibility: visible !important;
-    filter: none !important;
-  }
-  img[src*="assets/images/"] {
-    display: inline-block !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-  }
-  /* Don't force height:auto on gallery/carousel images — keeps Wix layout sizes */
-  .pro-gallery img[src*="assets/images/"] {
-    max-width: none;
-    height: inherit;
-  }
-  /* common Wix blur-up / hide-until-load */
-  .UQYcWy img, .gallery-item-common-info-outer, .item-container {
-    opacity: 1 !important;
-    visibility: visible !important;
-  }
-  /* Gallery click affordance */
-  .pro-gallery .gallery-item-container.clickable,
-  .pro-gallery [data-hook="item-action"],
-  .pro-gallery [data-hook="item-wrapper"] {
-    cursor: zoom-in !important;
-  }
-</style>
-
-
-<style id="standalone-carousel-css">
-  .pro-gallery.slider .gallery-horizontal-scroll {
-    position: relative !important;
-    overflow: hidden !important;
-  }
-  .pro-gallery.slider .abc-carousel-track {
-    height: 100%;
-  }
-  .pro-gallery.slider .nav-arrows-container {
-    color: rgb(162, 32, 82);
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-  }
-  .pro-gallery.slider .nav-arrows-container:hover { opacity: .85; }
-  .pro-gallery.slider .abc-slide-link { text-indent: -9999px; overflow: hidden; }
-  .pro-gallery.slider .abc-carousel-track img {
-    display: block !important;
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-  }
-</style>
-
-<style id="standalone-lightbox-css">
-  #abc-lightbox {
-    position: fixed; inset: 0; z-index: 2147483000;
-    display: none; align-items: center; justify-content: center;
-    background: rgba(0,0,0,.92); padding: 24px;
-    box-sizing: border-box;
-  }
-  #abc-lightbox.is-open { display: flex; }
-  #abc-lightbox img {
-    max-width: min(96vw, 1400px);
-    max-height: 92vh;
-    width: auto; height: auto;
-    object-fit: contain;
-    box-shadow: 0 12px 48px rgba(0,0,0,.45);
-    user-select: none;
-  }
-  #abc-lightbox .abc-lb-btn {
-    position: absolute; top: 50%; transform: translateY(-50%);
-    width: 48px; height: 48px; border: 0; border-radius: 0;
-    background: rgba(255,255,255,.12); color: #fff;
-    font: 28px/1 Georgia, "Times New Roman", serif;
-    cursor: pointer; display: flex; align-items: center; justify-content: center;
-  }
-  #abc-lightbox .abc-lb-btn:hover { background: rgba(255,255,255,.22); }
-  #abc-lightbox .abc-lb-prev { left: 12px; }
-  #abc-lightbox .abc-lb-next { right: 12px; }
-  #abc-lightbox .abc-lb-close {
-    top: 16px; right: 16px; transform: none;
-    width: 44px; height: 44px; font-size: 32px; line-height: 1;
-  }
-  #abc-lightbox .abc-lb-counter {
-    position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
-    color: rgba(255,255,255,.75); font: 13px/1.2 Arial, Helvetica, sans-serif;
-    letter-spacing: .04em;
-  }
-  body.abc-lightbox-open { overflow: hidden !important; }
-  @media (max-width: 640px) {
-    #abc-lightbox { padding: 12px; }
-    #abc-lightbox .abc-lb-btn { width: 40px; height: 40px; font-size: 24px; }
-    #abc-lightbox .abc-lb-prev { left: 4px; }
-    #abc-lightbox .abc-lb-next { right: 4px; }
-  }
-</style>
-
+<link rel="stylesheet" href="./assets/css/site.css" id="standalone-site-css"/>
 <script id="standalone-site-js">
 (function () {
   function fixMenus() {
@@ -1615,7 +1467,7 @@ url("static.wixstatic.com/ufonts/993276_e3cc5bf8b5464eedbc13549e35e5151b/ttf/fil
         <path d="M46.5 28.9L20.6 3c-.6-.6-1.6-.6-2.2 0l-4.8 4.8c-.6.6-.6 1.6 0 2.2l19.8 20-19.9 19.9c-.6.6-.6 1.6 0 2.2l4.8 4.8c.6.6 1.6.6 2.2 0l21-21 4.8-4.8c.8-.6.8-1.6.2-2.2z"/>
     </g>
 </svg>
-</span></span></span></a></div><!--/$--></div></div></div><!--/$--></div></div></div></div></main><!--$--><div id="soapAfterPagesContainer" class="page-without-sosp soapAfterPagesContainer page-without-sosp"><div data-mesh-id="soapAfterPagesContainerinlineContent" data-testid="inline-content" class=""><div data-mesh-id="soapAfterPagesContainerinlineContent-gridContainer" data-testid="mesh-container-content"><!--$--><div id="CONTROLLER_COMP_CUSTOM_ID" style="display:none"></div><!--/$--></div></div></div><!--/$--><div id="pinnedBottomCenter" class="pinnedBottomCenter"><!--$--><div id="comp-kklzvqa0-pinned-layer" class="comp-kklzvqa0-pinned-layer QED8q1"><!--$--><div id="comp-kklzvqa0" style="display:none"></div><!--/$--></div><!--/$--></div><footer id="SITE_FOOTER" class="CDNoF4 SITE_FOOTER wixui-footer" tabindex="-1"><div class="kBvIHj"><div class="EaoiSu" data-testid="screenWidthContainerBg"></div></div><div class="YmWgf4"><div class="H2MmBb"><div class="CmHRsG" data-testid="screenWidthContainerBgCenter"></div></div><div class="XgJ1FR"><div data-mesh-id="SITE_FOOTERinlineContent" data-testid="inline-content" class=""><div data-mesh-id="SITE_FOOTERinlineContent-gridContainer" data-testid="mesh-container-content"><!--$--><div id="comp-kknyqo2u" class="UwkEpO _v6ohL PO9MfV comp-kknyqo2u wixui-rich-text" data-testid="richTextElement"><h2 class="font_2 wixui-rich-text__text" style="font-size:18px;"><span style="font-weight:normal;" class="wixui-rich-text__text"><a href="basic-11.html" target="_self" class="wixui-rich-text__text"><span style="font-size:18px;" class="wixui-rich-text__text"><span style="font-family:futura-lt-w01-book,sans-serif;" class="wixui-rich-text__text"><span style="color:#292929;" class="wixui-rich-text__text">Shipping policy</span></span></span></a></span></h2></div><!--/$--><!--$--><div id="comp-kknyqwvv" class="UwkEpO _v6ohL PO9MfV comp-kknyqwvv wixui-rich-text" data-testid="richTextElement"><h2 class="font_2 wixui-rich-text__text" style="font-size:18px;"><span style="font-weight:normal;" class="wixui-rich-text__text"><a href="index.html" target="_self" class="wixui-rich-text__text"><span style="font-size:18px;" class="wixui-rich-text__text"><span style="font-family:futura-lt-w01-book,sans-serif;" class="wixui-rich-text__text"><span style="color:#292929;" class="wixui-rich-text__text">Return policy</span></span></span></a></span></h2></div><!--/$--><!--$--><div id="comp-kkuja77d" class="UwkEpO _v6ohL PO9MfV comp-kkuja77d wixui-rich-text" data-testid="richTextElement"><h2 class="font_2 wixui-rich-text__text" style="font-size:18px;"><a href="copyright.html" target="_self" class="wixui-rich-text__text"><span style="font-weight:normal;" class="wixui-rich-text__text"><span style="font-size:18px;" class="wixui-rich-text__text"><span style="font-family:futura-lt-w01-book,sans-serif;" class="wixui-rich-text__text"><span style="color:#292929;" class="wixui-rich-text__text">Copyright and use policy</span></span></span></span></a></h2></div><!--/$--><!--$--><div id="comp-kknysyj3" class="UwkEpO _v6ohL PO9MfV comp-kknysyj3 wixui-rich-text" data-testid="richTextElement"><h2 class="font_2 wixui-rich-text__text" style="font-size:18px;"><span style="font-weight:normal;" class="wixui-rich-text__text"><a href="contact.html" target="_self" class="wixui-rich-text__text"><span style="font-size:18px;" class="wixui-rich-text__text"><span style="font-family:futura-lt-w01-book,sans-serif;" class="wixui-rich-text__text"><span style="color:#292929;" class="wixui-rich-text__text">Contact us</span></span></span></a></span></h2></div><!--/$--><!--$--><div id="comp-kkkfx0tk" class="N8MGzv _v6ohL PO9MfV comp-kkkfx0tk wixui-rich-text" data-testid="richTextElement"><p class="font_9 wixui-rich-text__text" style="line-height:1.875em; text-align:center; font-size:15px;"><a href="tel:215 802 2253" class="wixui-rich-text__text"><span style="letter-spacing:normal;" class="wixui-rich-text__text"><span class="color_15 wixui-rich-text__text"><span style="text-decoration:underline;" class="wixui-rich-text__text">215 802-2253</span></span></span></a></p></div><!--/$--><!--$--><div id="comp-kklhs8nu" class="jko4jB comp-kklhs8nu"><div data-mesh-id="comp-kklhs8nuinlineContent" data-testid="inline-content" class=""><div data-mesh-id="comp-kklhs8nuinlineContent-gridContainer" data-testid="mesh-container-content"><!--$--><form id="comp-kklhs8o4" class="AYCJGp comp-kklhs8o4 wixui-form"><div data-mesh-id="comp-kklhs8o4inlineContent" data-testid="inline-content" class=""><div data-mesh-id="comp-kklhs8o4inlineContent-gridContainer" data-testid="mesh-container-content"><!--$--><div id="comp-kklhs8p8" class="UwkEpO _v6ohL PO9MfV comp-kklhs8p8 wixui-rich-text" data-testid="richTextElement"><h1 class="font_0 wixui-rich-text__text" style="text-align:center; font-size:22px;"><span style="font-size:22px;" class="wixui-rich-text__text"><span class="color_15 wixui-rich-text__text">Subscribe Form</span></span></h1></div><!--/$--><!--$--><div id="comp-kklhs8pn" class="Q1MQrw comp-kklhs8pn wixui-text-input TqroEf"><div class="nuFEsg"><input name="email" id="input_comp-kklhs8pn" class="nbaJII has-custom-focus wixui-text-input__input" type="email" placeholder="Email Address" required="" aria-invalid="false" pattern="^.+@.+\.[a-zA-Z]{2,63}$" maxLength="250" autoComplete="off" value=""/></div></div><!--/$--><!--$--><div class="comp-kklhs8q6 mu5PoX" id="comp-kklhs8q6" aria-disabled="false"><button aria-disabled="false" aria-label="Submit" data-testid="buttonElement" class="twJknM wixui-button ZhVEJq"><span class="OR4Nv8 wixui-button__label">Submit</span></button></div><!--/$--><!--$--><div id="comp-kklhs8qj" class="UwkEpO _v6ohL PO9MfV comp-kklhs8qj wixui-rich-text" data-testid="richTextElement"><p class="font_8 wixui-rich-text__text" style="text-align:center; font-size:18px;"><span class="color_15 wixui-rich-text__text">Thanks for submitting!</span></p></div><!--/$--></div></div></form><!--/$--></div></div></div><!--/$--><!--$--><div id="comp-kkkfx0tk1" class="N8MGzv _v6ohL PO9MfV comp-kkkfx0tk1 wixui-rich-text" data-testid="richTextElement"><p class="font_10 wixui-rich-text__text" style="line-height:1.79em; text-align:center; font-size:14px;"><span style="letter-spacing:normal;" class="wixui-rich-text__text"><a href="copyright.html" target="_self" class="wixui-rich-text__text"><span class="color_15 wixui-rich-text__text">&copy;2022 by Au Bon Cake. All Rights Reserved.</span></a></span></p></div><!--/$--></div></div></div></div></footer></div></div><div id="SCROLL_TO_BOTTOM" class="qe3oTb ignore-focus SCROLL_TO_BOTTOM" role="region" tabindex="-1" aria-label="bottom of page"><span class="TvbeET">bottom of page</span></div></div></div>
+</span></span></span></a></div><!--/$--></div></div></div><!--/$--></div></div></div></div></main><!--$--><div id="soapAfterPagesContainer" class="page-without-sosp soapAfterPagesContainer page-without-sosp"><div data-mesh-id="soapAfterPagesContainerinlineContent" data-testid="inline-content" class=""><div data-mesh-id="soapAfterPagesContainerinlineContent-gridContainer" data-testid="mesh-container-content"><!--$--><div id="CONTROLLER_COMP_CUSTOM_ID" style="display:none"></div><!--/$--></div></div></div><!--/$--><div id="pinnedBottomCenter" class="pinnedBottomCenter"><!--$--><div id="comp-kklzvqa0-pinned-layer" class="comp-kklzvqa0-pinned-layer QED8q1"><!--$--><div id="comp-kklzvqa0" style="display:none"></div><!--/$--></div><!--/$--></div><footer id="SITE_FOOTER" class="CDNoF4 SITE_FOOTER wixui-footer" tabindex="-1"><div class="kBvIHj"><div class="EaoiSu" data-testid="screenWidthContainerBg"></div></div><div class="YmWgf4"><div class="H2MmBb"><div class="CmHRsG" data-testid="screenWidthContainerBgCenter"></div></div><div class="XgJ1FR"><div data-mesh-id="SITE_FOOTERinlineContent" data-testid="inline-content" class=""><div data-mesh-id="SITE_FOOTERinlineContent-gridContainer" data-testid="mesh-container-content"><!--$--><div id="comp-kknyqo2u" class="UwkEpO _v6ohL PO9MfV comp-kknyqo2u wixui-rich-text" data-testid="richTextElement"><h2 class="font_2 wixui-rich-text__text" style="font-size:18px;"><span style="font-weight:normal;" class="wixui-rich-text__text"><a href="basic-11.html" target="_self" class="wixui-rich-text__text"><span style="font-size:18px;" class="wixui-rich-text__text"><span style="font-family:futura-lt-w01-book,sans-serif;" class="wixui-rich-text__text"><span style="color:#292929;" class="wixui-rich-text__text">Shipping policy</span></span></span></a></span></h2></div><!--/$--><!--$--><div id="comp-kknyqwvv" class="UwkEpO _v6ohL PO9MfV comp-kknyqwvv wixui-rich-text" data-testid="richTextElement"><h2 class="font_2 wixui-rich-text__text" style="font-size:18px;"><span style="font-weight:normal;" class="wixui-rich-text__text"><a href="index.html" target="_self" class="wixui-rich-text__text"><span style="font-size:18px;" class="wixui-rich-text__text"><span style="font-family:futura-lt-w01-book,sans-serif;" class="wixui-rich-text__text"><span style="color:#292929;" class="wixui-rich-text__text">Return policy</span></span></span></a></span></h2></div><!--/$--><!--$--><div id="comp-kkuja77d" class="UwkEpO _v6ohL PO9MfV comp-kkuja77d wixui-rich-text" data-testid="richTextElement"><h2 class="font_2 wixui-rich-text__text" style="font-size:18px;"><a href="copyright.html" target="_self" class="wixui-rich-text__text"><span style="font-weight:normal;" class="wixui-rich-text__text"><span style="font-size:18px;" class="wixui-rich-text__text"><span style="font-family:futura-lt-w01-book,sans-serif;" class="wixui-rich-text__text"><span style="color:#292929;" class="wixui-rich-text__text">Copyright and use policy</span></span></span></span></a></h2></div><!--/$--><!--$--><div id="comp-kknysyj3" class="UwkEpO _v6ohL PO9MfV comp-kknysyj3 wixui-rich-text" data-testid="richTextElement"><h2 class="font_2 wixui-rich-text__text" style="font-size:18px;"><span style="font-weight:normal;" class="wixui-rich-text__text"><a href="contact.html" target="_self" class="wixui-rich-text__text"><span style="font-size:18px;" class="wixui-rich-text__text"><span style="font-family:futura-lt-w01-book,sans-serif;" class="wixui-rich-text__text"><span style="color:#292929;" class="wixui-rich-text__text">Contact us</span></span></span></a></span></h2></div><!--/$--><!--$--><div id="comp-kkkfx0tk" class="N8MGzv _v6ohL PO9MfV comp-kkkfx0tk wixui-rich-text" data-testid="richTextElement"><p class="font_9 wixui-rich-text__text" style="line-height:1.875em; text-align:center; font-size:15px;"><a href="tel:215 802 2253" class="wixui-rich-text__text"><span style="letter-spacing:normal;" class="wixui-rich-text__text"><span class="color_15 wixui-rich-text__text"><span style="text-decoration:underline;" class="wixui-rich-text__text">215 802-2253</span></span></span></a></p></div><!--/$--><!--$--><div id="comp-kklhs8nu" class="jko4jB comp-kklhs8nu"><div data-mesh-id="comp-kklhs8nuinlineContent" data-testid="inline-content" class=""><div data-mesh-id="comp-kklhs8nuinlineContent-gridContainer" data-testid="mesh-container-content"><!--$--><form id="comp-kklhs8o4" class="AYCJGp comp-kklhs8o4 wixui-form"><div data-mesh-id="comp-kklhs8o4inlineContent" data-testid="inline-content" class=""><div data-mesh-id="comp-kklhs8o4inlineContent-gridContainer" data-testid="mesh-container-content"><!--$--><div id="comp-kklhs8p8" class="UwkEpO _v6ohL PO9MfV comp-kklhs8p8 wixui-rich-text" data-testid="richTextElement"><h1 class="font_0 wixui-rich-text__text" style="text-align:center; font-size:22px;"><span style="font-size:22px;" class="wixui-rich-text__text"><span class="color_15 wixui-rich-text__text">Subscribe Form</span></span></h1></div><!--/$--><!--$--><div id="comp-kklhs8pn" class="Q1MQrw comp-kklhs8pn wixui-text-input TqroEf"><div class="nuFEsg"><input name="email" id="input_comp-kklhs8pn" class="nbaJII has-custom-focus wixui-text-input__input" type="email" placeholder="Email Address" required="" aria-invalid="false" pattern="^.+@.+\.[a-zA-Z]{2,63}$" maxLength="250" autoComplete="off" value=""/></div></div><!--/$--><!--$--><div class="comp-kklhs8q6 mu5PoX" id="comp-kklhs8q6" aria-disabled="false"><button aria-disabled="false" aria-label="Submit" data-testid="buttonElement" class="twJknM wixui-button ZhVEJq"><span class="OR4Nv8 wixui-button__label">Submit</span></button></div><!--/$--><!--$--><div id="comp-kklhs8qj" class="UwkEpO _v6ohL PO9MfV comp-kklhs8qj wixui-rich-text" data-testid="richTextElement"><p class="font_8 wixui-rich-text__text" style="text-align:center; font-size:18px;"><span class="color_15 wixui-rich-text__text">Thanks for submitting!</span></p></div><!--/$--></div></div></form><!--/$--></div></div></div><!--/$--><!--$--><div id="comp-kkkfx0tk1" class="N8MGzv _v6ohL PO9MfV comp-kkkfx0tk1 wixui-rich-text" data-testid="richTextElement"><p class="font_10 wixui-rich-text__text" style="line-height:1.79em; text-align:center; font-size:14px;"><span style="letter-spacing:normal;" class="wixui-rich-text__text"><a href="copyright.html" target="_self" class="wixui-rich-text__text"><span class="color_15 wixui-rich-text__text">&copy;2026 by Au Bon Cake. All Rights Reserved.</span></a></span></p></div><!--/$--></div></div></div></div></footer></div></div><div id="SCROLL_TO_BOTTOM" class="qe3oTb ignore-focus SCROLL_TO_BOTTOM" role="region" tabindex="-1" aria-label="bottom of page"><span class="TvbeET">bottom of page</span></div></div></div>
 
     
     

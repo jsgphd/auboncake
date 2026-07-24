@@ -1,0 +1,561 @@
+/* Au Bon Cake — shared standalone styles (static GitHub Pages)
+ *
+ * COLOR PALETTE — all site colors live here.
+ * Do not put raw hex/rgb color values in rules below; use these variables.
+ * --------------------------------------------------------------------------- */
+:root {
+  /* Neutrals */
+  --abc-white: #ffffff;
+  --abc-page: #fbfbfb;              /* page underlay */
+  --abc-galleries-bg: #fafafa;     /* Galleries by Theme */
+  --abc-origin-bg: #f6f6f7;        /* Our Origin */
+  --abc-hero-carousel-bg: #f4f0ee;
+  --abc-dropdown-border: rgba(0, 0, 0, 0.12);
+  --abc-dropdown-hover: #f3f3f3;
+
+  /* Text */
+  --abc-dropdown-text: #222222;
+  --abc-footer-text: #292929;
+
+  /* Brand berry */
+  --abc-berry: #a22052;            /* accent bar, CTA, headings, arrows */
+  --abc-berry-hover: #dc4f85;      /* CTA hover */
+  --abc-dusty-rose: #d7b3af;       /* gallery label bars */
+
+  /* Disabled UI */
+  --abc-disabled-bg: #e2e2e2;
+  --abc-disabled-text: #8f8f8f;
+
+  /* Lightbox / overlays */
+  --abc-overlay: rgba(0, 0, 0, 0.92);
+  --abc-overlay-shadow: rgba(0, 0, 0, 0.45);
+  --abc-overlay-btn: rgba(255, 255, 255, 0.12);
+  --abc-overlay-btn-hover: rgba(255, 255, 255, 0.22);
+  --abc-overlay-muted: rgba(255, 255, 255, 0.75);
+
+  /* Bridge Wix theme tokens → palette (keeps Wix layout CSS in sync) */
+  --color_1: 20, 11, 10;
+  --color_2: 162, 32, 82;
+  --color_3: 140, 33, 52;
+  --color_4: 246, 246, 247;
+  --color_5: 248, 225, 196;
+  --color_6: 255, 255, 255;
+  --color_7: 215, 179, 175;
+  --color_8: 175, 103, 95;
+  --color_11: 255, 255, 255;
+  --color_12: 215, 179, 175;
+  --color_15: 20, 11, 10;
+  --color_18: 162, 32, 82;
+  --color_26: 251, 251, 251;
+  --color_27: 246, 246, 247;
+  --color_36: 255, 255, 255;
+  --color_38: 215, 179, 175;
+  --color_41: 162, 32, 82;
+  --color_43: 246, 246, 247;
+}
+
+/* ---- Chrome / runtime substitutes ---- */
+#SITE_HEADER,
+header,
+[data-testid="site-header"] {
+  display: block !important;
+  visibility: visible !important;
+}
+
+#SITE_CONTAINER,
+#site-root,
+#masterPage,
+#PAGES_CONTAINER,
+#SITE_PAGES {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Galleries dropdown */
+li.wixui-dropdown-menu__item {
+  position: relative !important;
+  overflow: visible !important;
+}
+
+li.wixui-dropdown-menu__item > ul {
+  display: none !important;
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  z-index: 99999 !important;
+  min-width: 220px !important;
+  margin: 0 !important;
+  padding: 8px 0 !important;
+  list-style: none !important;
+  background: var(--abc-white) !important;
+  border: 1px solid var(--abc-dropdown-border) !important;
+  box-shadow: 0 8px 24px var(--abc-dropdown-border) !important;
+}
+
+li.wixui-dropdown-menu__item:hover > ul,
+li.wixui-dropdown-menu__item:focus-within > ul,
+li.wixui-dropdown-menu__item.is-open > ul {
+  display: block !important;
+}
+
+li.wixui-dropdown-menu__item > ul > li > a {
+  display: block !important;
+  padding: 8px 18px !important;
+  color: var(--abc-dropdown-text) !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  font: 14px/1.3 Arial, Helvetica, sans-serif !important;
+}
+
+li.wixui-dropdown-menu__item > ul > li > a:hover {
+  background: var(--abc-dropdown-hover) !important;
+}
+
+#comp-kkld2ygi,
+#comp-kkld2yginavContainer,
+#comp-kkld2ygiitemsContainer,
+#comp-kkld2ygi1,
+#comp-kkld2xkm,
+#comp-kkld2xkm1,
+#comp-kkld2xko,
+[data-mesh-id*="kkld2"],
+nav,
+.wixui-dropdown-menu,
+.NSbBgP {
+  overflow: visible !important;
+}
+
+#comp-kkld2ygi__more__,
+li[id$="__more__"] {
+  display: none !important;
+}
+
+/* Footer subscribe form (unused on static site) */
+#comp-kklhs8nu,
+#comp-kklhs8o4,
+#comp-kklhs8p8,
+#comp-kklhs8pn,
+#comp-kklhs8q6,
+#comp-kklhs8qj {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Footer policy links (shipping / return / copyright & use) */
+#comp-kknyqo2u,
+#comp-kknyqwvv,
+#comp-kkuja77d {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Nudge Contact us + phone + copyright down */
+#comp-kknysyj3,
+#comp-kkkfx0tk,
+#comp-kkkfx0tk1 {
+  margin-top: 30px !important;
+}
+
+/* Kosher Miami logos */
+#comp-l3chwh8b {
+  width: 158px !important;
+  height: 157px !important;
+  --width: 158px !important;
+  --height: 157px !important;
+}
+
+#comp-l3chzrnt {
+  width: 147px !important;
+  height: 147px !important;
+  --width: 147px !important;
+  --height: 147px !important;
+}
+
+#comp-l3chwh8b img,
+#comp-l3chzrnt img {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ---- Media visibility (static hosting) ---- */
+img,
+picture,
+video,
+.gallery-item,
+.gallery-item-visible,
+.gallery-item-preloaded,
+.gRkIq0,
+.sFiSiq,
+.UQYcWy,
+.Kv1aVt,
+.MW5IWV,
+[data-testid="imageX"],
+[data-hook="gallery-item-image-img"],
+.l7_2fn,
+.imageItem,
+.UQYcWy img,
+.gallery-item-common-info-outer,
+.item-container {
+  opacity: 1 !important;
+  visibility: visible !important;
+  filter: none !important;
+}
+
+img[src*="assets/images/"] {
+  display: inline-block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.pro-gallery img[src*="assets/images/"] {
+  max-width: none;
+  height: inherit;
+}
+
+.pro-gallery .gallery-item-container.clickable,
+.pro-gallery [data-hook="item-action"],
+.pro-gallery [data-hook="item-wrapper"] {
+  cursor: zoom-in !important;
+}
+
+/* ---- Shared gallery carousels ---- */
+.pro-gallery.slider .gallery-horizontal-scroll {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.pro-gallery.slider .abc-carousel-track {
+  height: 100%;
+}
+
+.pro-gallery.slider .nav-arrows-container {
+  color: var(--abc-berry);
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.pro-gallery.slider .nav-arrows-container:hover {
+  opacity: 0.85;
+}
+
+.pro-gallery.slider .abc-slide-link {
+  text-indent: -9999px;
+  overflow: hidden;
+}
+
+.pro-gallery.slider .abc-carousel-track img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* ---- Homepage hero carousel (replaces broken Wix slider) ---- */
+#comp-kkn1m2n6 .pro-gallery,
+#gallery-wrapper-comp-kkn1m2n6 {
+  display: none !important;
+}
+
+#abc-hero-carousel,
+.abc-hero-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 981px;
+  height: 557px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: var(--abc-hero-carousel-bg);
+}
+
+.abc-hero-viewport {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.abc-hero-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s ease;
+  will-change: transform;
+}
+
+.abc-hero-slide {
+  flex: 0 0 100%;
+  flex-shrink: 0;
+  width: 100%;
+  min-width: 100%;
+  height: 100%;
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.abc-hero-slide img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  max-width: none !important;
+  border: 0;
+}
+
+.abc-hero-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  color: var(--abc-berry);
+  font: 40px/1 Georgia, "Times New Roman", serif;
+  cursor: pointer;
+  padding: 0;
+}
+
+.abc-hero-btn:hover {
+  opacity: 0.75;
+}
+
+.abc-hero-prev {
+  left: 12px;
+}
+
+.abc-hero-next {
+  right: 12px;
+}
+
+@media (max-width: 1000px) {
+  #abc-hero-carousel,
+  .abc-hero-carousel {
+    height: 56vw;
+    max-height: 557px;
+  }
+}
+
+/* ---- Lightbox ---- */
+#abc-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: var(--abc-overlay);
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+#abc-lightbox.is-open {
+  display: flex;
+}
+
+#abc-lightbox img {
+  max-width: min(96vw, 1400px);
+  max-height: 92vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  box-shadow: 0 12px 48px var(--abc-overlay-shadow);
+  user-select: none;
+}
+
+#abc-lightbox .abc-lb-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 0;
+  background: var(--abc-overlay-btn);
+  color: var(--abc-white);
+  font: 28px/1 Georgia, "Times New Roman", serif;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#abc-lightbox .abc-lb-btn:hover {
+  background: var(--abc-overlay-btn-hover);
+}
+
+#abc-lightbox .abc-lb-prev {
+  left: 12px;
+}
+
+#abc-lightbox .abc-lb-next {
+  right: 12px;
+}
+
+#abc-lightbox .abc-lb-close {
+  top: 16px;
+  right: 16px;
+  transform: none;
+  width: 44px;
+  height: 44px;
+  font-size: 32px;
+  line-height: 1;
+}
+
+#abc-lightbox .abc-lb-counter {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--abc-overlay-muted);
+  font: 13px/1.2 Arial, Helvetica, sans-serif;
+  letter-spacing: 0.04em;
+}
+
+body.abc-lightbox-open {
+  overflow: hidden !important;
+}
+
+@media (max-width: 640px) {
+  #abc-lightbox {
+    padding: 12px;
+  }
+
+  #abc-lightbox .abc-lb-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
+
+  #abc-lightbox .abc-lb-prev {
+    left: 4px;
+  }
+
+  #abc-lightbox .abc-lb-next {
+    right: 4px;
+  }
+}
+
+/* ---- Homepage — match original auboncake.com look ---- */
+
+/* Page underlay */
+#pageBackground_lh2lj {
+  --bg-overlay-color: var(--abc-page) !important;
+}
+
+/* Berry accent bar under nav / kosher logo (full-bleed on home + order) */
+#comp-l1z1qig2,
+#comp-l3chzrlx {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  left: 50% !important;
+  margin-left: -50vw !important;
+  margin-right: 0 !important;
+  position: relative !important;
+  box-sizing: border-box !important;
+  --bg: var(--color_41) !important;
+  --alpha-bg: 1 !important;
+  opacity: 1 !important;
+}
+
+#comp-l1z1qig2 .gyovE9,
+#comp-l3chzrlx .gyovE9 {
+  background-color: var(--abc-berry) !important;
+}
+
+/* Galleries by Theme */
+#comp-l712w99o {
+  --bg-overlay-color: var(--abc-galleries-bg) !important;
+}
+
+#bgLayers_comp-l712w99o .V9k0ll,
+#comp-l712w99o .V9k0ll {
+  background-color: var(--abc-galleries-bg) !important;
+}
+
+/* Our Origin */
+#comp-kkkjekvc1 {
+  --bg-overlay-color: var(--abc-origin-bg) !important;
+}
+
+#bgLayers_comp-kkkjekvc1 .V9k0ll,
+#comp-kkkjekvc1 .V9k0ll {
+  background-color: var(--abc-origin-bg) !important;
+}
+
+/* CLICK TO ORDER — original berry button */
+#comp-kkn397b6 .style-kkoa9ppz__root,
+#comp-kkn397b6 .StylableButton2545352419__root {
+  background: var(--abc-berry) !important;
+  transition: background-color 0.2s ease !important;
+}
+
+#comp-kkn397b6 .style-kkoa9ppz__root:hover,
+#comp-kkn397b6 .StylableButton2545352419__root:hover {
+  background: var(--abc-berry-hover) !important;
+}
+
+#comp-kkn397b6 .style-kkoa9ppz__root:disabled,
+#comp-kkn397b6 .StylableButton2545352419__root:disabled {
+  background: var(--abc-disabled-bg) !important;
+}
+
+#comp-kkn397b6 .StylableButton2545352419__label {
+  color: var(--abc-white) !important;
+}
+
+#comp-kkn397b6 .style-kkoa9ppz__root:disabled .StylableButton2545352419__label {
+  color: var(--abc-disabled-text) !important;
+}
+
+#comp-kkn397b6 .StylableButton2545352419__icon {
+  fill: var(--abc-white) !important;
+}
+
+#comp-kkn397b6 .style-kkoa9ppz__root:disabled .StylableButton2545352419__icon {
+  fill: var(--abc-disabled-text) !important;
+}
+
+/* Footer — white with dark text (original) */
+#SITE_FOOTER {
+  --bg: var(--color_11) !important;
+  --bgctr: var(--color_11) !important;
+  --bg-overlay-color: var(--abc-white) !important;
+  background-color: var(--abc-white) !important;
+}
+
+#bgLayers_SITE_FOOTER .LNYVZi,
+#SITE_FOOTER .LNYVZi {
+  background-color: var(--abc-white) !important;
+}
+
+#SITE_FOOTER,
+#SITE_FOOTER .wixui-rich-text__text,
+#SITE_FOOTER .wixui-rich-text,
+#SITE_FOOTER span,
+#SITE_FOOTER p,
+#SITE_FOOTER a,
+#SITE_FOOTER a span {
+  color: var(--abc-footer-text) !important;
+}
+
+#SITE_FOOTER a:hover,
+#SITE_FOOTER a:hover span {
+  color: var(--abc-berry) !important;
+}
