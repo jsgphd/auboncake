@@ -1,6 +1,8 @@
 /**
- * Au Bon Cake — standalone chrome
- * Replaces the Wix header menu with a centered brand + juicy nav + CTA.
+ * Au Bon Cake — editorial chrome
+ * Gallery-Editorial top layout: girl logo + Kosher seal kept prominent,
+ * nav/CTA cleaned up, homepage hero rearranged into a two-column composition.
+ * No content removed — only rearranged.
  */
 (function () {
   var GALLERIES = [
@@ -30,44 +32,61 @@
     return path === "" ? "index.html" : path;
   }
 
+  function isHome() {
+    var page = pageName();
+    return page === "index.html" || page === "";
+  }
+
   function isActive(href) {
     var page = pageName();
-    if (href === "index.html") return page === "index.html" || page === "";
+    if (href === "index.html") return isHome();
     return page === href;
   }
 
-  function logoSrc() {
-    var img = document.querySelector('#SITE_HEADER img[src*="logo-au-bon-cake"], img[src*="logo-au-bon-cake"]');
-    return (img && img.getAttribute("src")) || "./assets/images/logo-au-bon-cake.png";
+  function findImgSrc(selector, fallback) {
+    var img = document.querySelector(selector);
+    return (img && img.getAttribute("src")) || fallback;
   }
 
   function buildChrome() {
     if (document.getElementById("abc-site-chrome")) return;
 
-    var page = pageName();
-    var galleryActive = GALLERIES.some(function (g) { return g.href === page; });
+    var galleryActive = GALLERIES.some(function (g) { return g.href === pageName(); });
     var galleryItems = GALLERIES.map(function (g) {
       return '<a href="' + g.href + '"' + (isActive(g.href) ? ' class="is-active"' : "") + ">" + g.label + "</a>";
     }).join("");
 
     var socialItems = SOCIAL.map(function (s) {
-      return '<a href="' + s.href + '" target="_blank" rel="noopener" aria-label="' + s.label + '">' +
-        '<img src="' + s.icon + '" alt="" width="22" height="22" />' +
-      "</a>";
+      return (
+        '<a href="' + s.href + '" target="_blank" rel="noopener" aria-label="' + s.label + '">' +
+          '<img src="' + s.icon + '" alt="" width="18" height="18" />' +
+        "</a>"
+      );
     }).join("");
 
-    var chrome = document.createElement("div");
-    chrome.id = "abc-site-chrome";
-    chrome.className = "abc-site-chrome";
-    chrome.innerHTML =
-      '<div class="abc-chrome-top">' +
+    var girlSrc = findImgSrc('img[src*="logo-au-bon-cake"]', "./assets/images/logo-au-bon-cake.png");
+    var kosherSrc = findImgSrc(
+      '#comp-l3chwh8b img, #comp-l3chzrnt img, img[src*="logo-kosher-miami"]',
+      "./assets/images/logo-kosher-miami.png"
+    );
+
+    var brandCluster =
+      '<div class="abc-chrome-brand-cluster">' +
+        (isHome()
+          ? ""
+          : '<img class="abc-chrome-kosher" src="' + kosherSrc + '" alt="Kosher Miami" width="72" height="72" />') +
         '<a class="abc-chrome-brand" href="index.html" aria-label="Au Bon Cake home">' +
-          '<img src="' + logoSrc() + '" alt="Au Bon Cake" />' +
+          '<img src="' + girlSrc + '" alt="Au Bon Cake" />' +
         "</a>" +
-        '<div class="abc-chrome-social">' + socialItems + "</div>" +
-      "</div>" +
-      '<nav class="abc-chrome-nav" aria-label="Primary">' +
-        '<div class="abc-chrome-inner">' +
+      "</div>";
+
+    var chrome = document.createElement("header");
+    chrome.id = "abc-site-chrome";
+    chrome.className = "abc-site-chrome abc-editorial-chrome";
+    chrome.innerHTML =
+      '<div class="abc-chrome-bar">' +
+        brandCluster +
+        '<nav class="abc-chrome-nav" aria-label="Primary">' +
           '<ul class="abc-chrome-links">' +
             '<li><a class="abc-chrome-link' + (isActive("index.html") ? " is-active" : "") + '" href="index.html">Home</a></li>' +
             '<li class="abc-chrome-dropdown' + (galleryActive ? " is-current" : "") + '">' +
@@ -76,18 +95,20 @@
               "</button>" +
               '<div class="abc-chrome-panel" role="menu">' + galleryItems + "</div>" +
             "</li>" +
+            '<li><a class="abc-chrome-link' + (isActive("order.html") ? " is-active" : "") + '" href="order.html">Order</a></li>' +
             '<li><a class="abc-chrome-link' + (isActive("contact.html") ? " is-active" : "") + '" href="contact.html">Contact</a></li>' +
           "</ul>" +
-          '<a class="abc-chrome-cta" href="order.html">Order a Cake</a>' +
+        "</nav>" +
+        '<div class="abc-chrome-end">' +
+          '<a class="abc-chrome-cta" href="order.html">Click to Order</a>' +
+          '<div class="abc-chrome-social">' + socialItems + "</div>" +
         "</div>" +
-      "</nav>";
+      "</div>" +
+      '<div class="abc-chrome-rule" aria-hidden="true"></div>';
 
-    var header = document.getElementById("SITE_HEADER");
-    if (header) {
-      header.insertBefore(chrome, header.firstChild);
-    } else {
-      document.body.insertBefore(chrome, document.body.firstChild);
-    }
+    var host = document.getElementById("SITE_HEADER") || document.body;
+    if (host.id === "SITE_HEADER") host.insertBefore(chrome, host.firstChild);
+    else host.insertBefore(chrome, host.firstChild);
 
     var drop = chrome.querySelector(".abc-chrome-dropdown");
     var btn = chrome.querySelector(".abc-chrome-dropbtn");
@@ -107,41 +128,87 @@
     }
   }
 
-  function lowercaseArtisticDesserts() {
-    var el = document.getElementById("comp-kkngirfd");
-    if (!el) return;
-    el.querySelectorAll("h1, span, p").forEach(function (node) {
+  function lowercaseArtisticDesserts(root) {
+    var scope = root || document.getElementById("comp-kkngirfd") || document;
+    scope.querySelectorAll("h1, span, p").forEach(function (node) {
       if (/artistic\s+desserts/i.test(node.textContent || "") && node.children.length === 0) {
         node.textContent = "artistic desserts";
       }
     });
-    var h1 = el.querySelector("h1");
-    if (h1 && /ARTISTIC\s+DESSERTS/i.test(h1.textContent || "")) {
-      var spans = h1.querySelectorAll("span");
-      var leaf = spans[spans.length - 1] || h1;
-      leaf.textContent = "artistic desserts";
-    }
   }
 
-  function ensureHeroCta() {
-    if (pageName() !== "index.html" && pageName() !== "") return;
-    if (document.getElementById("abc-hero-cta")) return;
+  function composeEditorialHero() {
+    if (!isHome()) return;
+    if (document.getElementById("abc-editorial-hero")) return;
 
-    var hero =
+    var kosher = document.getElementById("comp-l3chwh8b");
+    var title = document.getElementById("comp-kkngirfd");
+    var carousel =
       document.getElementById("abc-hero-carousel") ||
       document.querySelector(".abc-hero-carousel") ||
       document.getElementById("comp-kkn1m2n6");
-    if (!hero || !hero.parentElement) return;
 
-    var wrap = document.createElement("div");
-    wrap.id = "abc-hero-cta";
-    wrap.className = "abc-hero-cta";
-    wrap.innerHTML =
-      '<a class="abc-hero-cta-btn" href="order.html">' +
-        "<span>Click to Order</span>" +
-        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h12m0 0-5-5m5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
-      "</a>";
-    hero.parentElement.insertBefore(wrap, hero.nextSibling);
+    var section = document.createElement("section");
+    section.id = "abc-editorial-hero";
+    section.className = "abc-editorial-hero";
+    section.innerHTML =
+      '<div class="abc-editorial-copy">' +
+        '<div class="abc-editorial-kosher-slot"></div>' +
+        '<div class="abc-editorial-title-slot"></div>' +
+        '<div class="abc-editorial-actions">' +
+          '<a class="abc-hero-cta-btn" href="order.html">' +
+            "<span>Click to Order</span>" +
+            '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h12m0 0-5-5m5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+          "</a>" +
+          '<a class="abc-editorial-ghost" href="all.html">View galleries</a>' +
+        "</div>" +
+      "</div>" +
+      '<div class="abc-editorial-media"></div>';
+
+    var kosherSlot = section.querySelector(".abc-editorial-kosher-slot");
+    var titleSlot = section.querySelector(".abc-editorial-title-slot");
+    var mediaSlot = section.querySelector(".abc-editorial-media");
+
+    if (kosher) kosherSlot.appendChild(kosher);
+    else {
+      kosherSlot.innerHTML =
+        '<img class="abc-editorial-kosher-img" src="./assets/images/logo-kosher-miami.png" alt="Kosher Miami" />';
+    }
+
+    if (title) {
+      titleSlot.appendChild(title);
+      lowercaseArtisticDesserts(title);
+    } else {
+      titleSlot.innerHTML = '<h1 class="abc-editorial-heading">artistic desserts</h1>';
+    }
+
+    if (carousel) mediaSlot.appendChild(carousel);
+
+    // Place editorial band above the Wix page mesh (avoids uvik8H stacking trap)
+    var main = document.getElementById("PAGES_CONTAINER");
+    var sitePages = document.getElementById("SITE_PAGES");
+    if (main && sitePages) {
+      main.insertBefore(section, sitePages);
+    } else if (sitePages && sitePages.parentElement) {
+      sitePages.parentElement.insertBefore(section, sitePages);
+    } else {
+      var pageRoot = document.getElementById("lh2lj");
+      if (pageRoot && pageRoot.parentElement) pageRoot.parentElement.insertBefore(section, pageRoot);
+      else document.body.insertBefore(section, document.body.firstChild);
+    }
+
+    [
+      document.getElementById("comp-l1z1qig2"),
+      document.getElementById("comp-kkn397b6"),
+      document.getElementById("abc-hero-cta"),
+      document.getElementById("comp-kkngirf5"),
+      document.getElementById("comp-l1z0qnl8"),
+      document.getElementById("comp-mqzh07h71")
+    ].forEach(function (el) {
+      if (el) el.classList.add("abc-relocated-source");
+    });
+
+    document.documentElement.classList.add("abc-editorial-home");
   }
 
   function scrubWixDust() {
@@ -160,7 +227,7 @@
     scrubWixDust();
     buildChrome();
     lowercaseArtisticDesserts();
-    ensureHeroCta();
+    composeEditorialHero();
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
