@@ -2,29 +2,42 @@
  *
  * COLOR PALETTE — all site colors live here.
  * Do not put raw hex/rgb color values in rules below; use these variables.
+ *
+ * newui: Gallery Editorial — soft blush neutrals, Fraunces + Instrument Sans,
+ * rounded theme cards, prominent girl logo + Kosher Miami seal.
  * --------------------------------------------------------------------------- */
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Instrument+Sans:wght@400;500;600;700&display=swap");
+
 :root {
-  /* Neutrals */
+  /* Neutrals — soft editorial wash */
   --abc-white: #ffffff;
-  --abc-page: #fbfbfb;              /* page underlay */
-  --abc-galleries-bg: #fafafa;     /* Galleries by Theme */
-  --abc-origin-bg: #f6f6f7;        /* Our Origin */
+  --abc-page: #fcfaf9;              /* page underlay */
+  --abc-galleries-bg: #f4f0ee;     /* Galleries by Theme */
+  --abc-origin-bg: #f7f3f1;        /* Our Origin */
   --abc-hero-carousel-bg: #f4f0ee;
-  --abc-dropdown-border: rgba(0, 0, 0, 0.12);
-  --abc-dropdown-hover: #f3f3f3;
+  --abc-dropdown-border: rgba(28, 20, 18, 0.12);
+  --abc-dropdown-hover: #f3ebe8;
+  --abc-card-label: #f6ecef;       /* soft tinted gallery label area */
+  --abc-radius: 22px;
 
   /* Text */
-  --abc-dropdown-text: #222222;
-  --abc-footer-text: #292929;
+  --abc-dropdown-text: #1c1412;
+  --abc-footer-text: #3a2e2c;
+  --abc-ink: #1c1412;
+  --abc-muted: #5c504c;
 
   /* Brand berry */
   --abc-berry: #a22052;            /* accent bar, CTA, headings, arrows */
-  --abc-berry-hover: #dc4f85;      /* CTA hover */
-  --abc-dusty-rose: #d7b3af;       /* gallery label bars */
+  --abc-berry-hover: #c43a6c;      /* CTA hover */
+  --abc-dusty-rose: #f6ecef;       /* gallery label bars (soft tint) */
+
+  /* Typography */
+  --abc-font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --abc-font-body: "Instrument Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   /* Disabled UI */
-  --abc-disabled-bg: #e2e2e2;
-  --abc-disabled-text: #8f8f8f;
+  --abc-disabled-bg: #e8e2e0;
+  --abc-disabled-text: #8f8582;
 
   /* Lightbox / overlays */
   --abc-overlay: rgba(0, 0, 0, 0.92);
@@ -34,24 +47,37 @@
   --abc-overlay-muted: rgba(255, 255, 255, 0.75);
 
   /* Bridge Wix theme tokens → palette (keeps Wix layout CSS in sync) */
-  --color_1: 20, 11, 10;
+  --color_1: 28, 20, 18;
   --color_2: 162, 32, 82;
   --color_3: 140, 33, 52;
-  --color_4: 246, 246, 247;
+  --color_4: 244, 240, 238;
   --color_5: 248, 225, 196;
   --color_6: 255, 255, 255;
-  --color_7: 215, 179, 175;
+  --color_7: 246, 236, 239;
   --color_8: 175, 103, 95;
   --color_11: 255, 255, 255;
-  --color_12: 215, 179, 175;
-  --color_15: 20, 11, 10;
+  --color_12: 246, 236, 239;
+  --color_15: 28, 20, 18;
   --color_18: 162, 32, 82;
-  --color_26: 251, 251, 251;
-  --color_27: 246, 246, 247;
+  --color_26: 252, 250, 249;
+  --color_27: 247, 243, 241;
   --color_36: 255, 255, 255;
-  --color_38: 215, 179, 175;
+  --color_38: 246, 236, 239;
   --color_41: 162, 32, 82;
-  --color_43: 246, 246, 247;
+  --color_43: 244, 240, 238;
+
+  /* Override Wix font tokens site-wide */
+  --font_0: normal normal 600 40px/1.2em var(--abc-font-display);
+  --font_1: normal normal 500 16px/1.5em var(--abc-font-body);
+  --font_2: normal normal 600 32px/1.25em var(--abc-font-display);
+  --font_3: normal normal 600 56px/1.15em var(--abc-font-display);
+  --font_4: normal normal 600 48px/1.2em var(--abc-font-display);
+  --font_5: normal normal 600 36px/1.25em var(--abc-font-display);
+  --font_6: normal normal 600 28px/1.3em var(--abc-font-display);
+  --font_7: normal normal 400 18px/1.6em var(--abc-font-body);
+  --font_8: normal normal 500 15px/1.55em var(--abc-font-body);
+  --font_9: normal normal 400 14px/1.55em var(--abc-font-body);
+  --font_10: normal normal 400 12px/1.5em var(--abc-font-body);
 }
 
 /* ---- Chrome / runtime substitutes ---- */
@@ -104,7 +130,7 @@ li.wixui-dropdown-menu__item > ul > li > a {
   color: var(--abc-dropdown-text) !important;
   text-decoration: none !important;
   white-space: nowrap !important;
-  font: 14px/1.3 Arial, Helvetica, sans-serif !important;
+  font: 500 14px/1.3 var(--abc-font-body) !important;
 }
 
 li.wixui-dropdown-menu__item > ul > li > a:hover {
@@ -166,25 +192,61 @@ li[id$="__more__"] {
   margin-top: 30px !important;
 }
 
-/* Kosher Miami logos */
+/* Kosher Miami logos — force visible (Wix motion leaves scale at 0) + prominent */
+#comp-l3chwh8b,
+#comp-l3chzrnt {
+  animation: none !important;
+  transform: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  --motion-scale: 1 !important;
+  --motion-rotate: 0deg !important;
+  z-index: 5 !important;
+}
+
 #comp-l3chwh8b {
-  width: 158px !important;
-  height: 157px !important;
-  --width: 158px !important;
-  --height: 157px !important;
+  width: 188px !important;
+  height: 188px !important;
+  --width: 188px !important;
+  --height: 188px !important;
 }
 
 #comp-l3chzrnt {
-  width: 147px !important;
-  height: 147px !important;
-  --width: 147px !important;
-  --height: 147px !important;
+  width: 176px !important;
+  height: 176px !important;
+  --width: 176px !important;
+  --height: 176px !important;
 }
 
 #comp-l3chwh8b img,
 #comp-l3chzrnt img {
   width: 100% !important;
   height: 100% !important;
+  object-fit: contain !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Au Bon Cake girl logo — keep hero-level in header */
+#comp-kkks5hab1,
+#SITE_HEADER .wixui-image[class*="comp-kkks5hab"],
+header a[href="index.html"] img[src*="logo-au-bon-cake"] {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+#comp-kkks5hab1 {
+  width: 340px !important;
+  height: 78px !important;
+  --width: 340px !important;
+  --height: 78px !important;
+}
+
+#comp-kkks5hab1 img,
+#img_comp-kkks5hab1 {
+  width: 340px !important;
+  height: 78px !important;
+  object-fit: contain !important;
 }
 
 /* ---- Media visibility (static hosting) ---- */
@@ -424,7 +486,7 @@ img[src*="assets/images/"] {
   left: 50%;
   transform: translateX(-50%);
   color: var(--abc-overlay-muted);
-  font: 13px/1.2 Arial, Helvetica, sans-serif;
+  font: 500 13px/1.2 var(--abc-font-body);
   letter-spacing: 0.04em;
 }
 
@@ -452,14 +514,42 @@ body.abc-lightbox-open {
   }
 }
 
-/* ---- Homepage — match original auboncake.com look ---- */
+/* ---- Homepage / site — Gallery Editorial newui ---- */
 
-/* Page underlay */
-#pageBackground_lh2lj {
+/* Soft page underlay */
+#pageBackground_lh2lj,
+[id^="pageBackground_"] {
   --bg-overlay-color: var(--abc-page) !important;
 }
 
-/* Berry accent bar under nav / kosher logo (full-bleed on home + order) */
+body,
+#SITE_CONTAINER,
+#site-root {
+  background-color: var(--abc-page) !important;
+  color: var(--abc-ink);
+}
+
+/* Header soft white */
+#SITE_HEADER,
+#SITE_HEADER .CDNoF4,
+#bgLayers_SITE_HEADER .LNYVZi {
+  --bg: var(--color_11) !important;
+  --bgctr: var(--color_11) !important;
+  background-color: var(--abc-white) !important;
+}
+
+/* Nav links — Instrument Sans */
+#SITE_HEADER .agzDLy .VhM8Ji,
+#SITE_HEADER .wixui-dropdown-menu a,
+nav .VhM8Ji {
+  font-family: var(--abc-font-body) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  font-size: 12px !important;
+}
+
+/* Soft thin berry accent bar under nav / kosher logo */
 #comp-l1z1qig2,
 #comp-l3chzrlx {
   width: 100vw !important;
@@ -472,20 +562,26 @@ body.abc-lightbox-open {
   --bg: var(--color_41) !important;
   --alpha-bg: 1 !important;
   opacity: 1 !important;
+  height: 4px !important;
+  min-height: 4px !important;
 }
 
 #comp-l1z1qig2 .gyovE9,
 #comp-l3chzrlx .gyovE9 {
   background-color: var(--abc-berry) !important;
+  border-radius: 0 !important;
 }
 
-/* Galleries by Theme */
-#comp-l712w99o {
+/* Galleries by Theme section wash */
+#comp-l712w99o,
+#comp-mqzh07h72,
+#comp-lcmrkmdf {
   --bg-overlay-color: var(--abc-galleries-bg) !important;
 }
 
 #bgLayers_comp-l712w99o .V9k0ll,
-#comp-l712w99o .V9k0ll {
+#comp-l712w99o .V9k0ll,
+#bgLayers_comp-mqzh07h72 .LNYVZi {
   background-color: var(--abc-galleries-bg) !important;
 }
 
@@ -499,11 +595,32 @@ body.abc-lightbox-open {
   background-color: var(--abc-origin-bg) !important;
 }
 
-/* CLICK TO ORDER — original berry button */
+/* Display headings — Fraunces + berry */
+#comp-l1z0qnl8 .wixui-rich-text__text,
+#comp-lcmrkmdf .wixui-rich-text__text,
+h1.font_2,
+h2.font_2,
+h1.wixui-rich-text__text,
+h2.wixui-rich-text__text {
+  font-family: var(--abc-font-display) !important;
+  color: var(--abc-berry) !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+}
+
+p.font_8,
+p.font_9,
+.wixui-rich-text p,
+.wixui-rich-text span {
+  font-family: var(--abc-font-body) !important;
+}
+
+/* CLICK TO ORDER — soft editorial CTA */
 #comp-kkn397b6 .style-kkoa9ppz__root,
 #comp-kkn397b6 .StylableButton2545352419__root {
   background: var(--abc-berry) !important;
-  transition: background-color 0.2s ease !important;
+  border-radius: 4px !important;
+  transition: background-color 0.2s ease, transform 0.2s ease !important;
 }
 
 #comp-kkn397b6 .style-kkoa9ppz__root:hover,
@@ -518,6 +635,9 @@ body.abc-lightbox-open {
 
 #comp-kkn397b6 .StylableButton2545352419__label {
   color: var(--abc-white) !important;
+  font-family: var(--abc-font-body) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.12em !important;
 }
 
 #comp-kkn397b6 .style-kkoa9ppz__root:disabled .StylableButton2545352419__label {
@@ -532,12 +652,90 @@ body.abc-lightbox-open {
   fill: var(--abc-disabled-text) !important;
 }
 
-/* Footer — white with dark text (original) */
+/* Theme gallery cards — rounded image + soft tinted label (user reference) */
+#comp-lcmrjr9o .gallery-item-container,
+#comp-lcmrjr9o .gallery-item-container.item-container-regular {
+  border-radius: var(--abc-radius) !important;
+  overflow: hidden !important;
+  background: var(--abc-white) !important;
+  box-shadow: none !important;
+}
+
+#comp-lcmrjr9o .gallery-item-wrapper,
+#comp-lcmrjr9o .gallery-item-content,
+#comp-lcmrjr9o [data-hook="item-wrapper"],
+#comp-lcmrjr9o .gallery-item-visible,
+#comp-lcmrjr9o .gallery-item {
+  border-radius: 0 !important;
+  overflow: hidden !important;
+}
+
+#comp-lcmrjr9o .gallery-item-common-info-outer {
+  margin: 0 !important;
+  padding: 0 !important;
+  background-color: var(--abc-card-label) !important;
+}
+
+#comp-lcmrjr9o .gallery-item-common-info,
+#comp-lcmrjr9o .gallery-item-bottom-info {
+  background-color: var(--abc-card-label) !important;
+  border-radius: 0 !important;
+  overflow: hidden !important;
+}
+
+#comp-lcmrjr9o .gallery-item-common-info-outer [style*="background-color"],
+#comp-lcmrjr9o .gallery-item-bottom-info[style*="background-color"] {
+  background-color: var(--abc-card-label) !important;
+}
+
+#comp-lcmrjr9o .info-element-text {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#comp-lcmrjr9o .info-element-title,
+#comp-lcmrjr9o .info-element-title span,
+#comp-lcmrjr9o [data-hook="item-title"],
+#comp-lcmrjr9o [data-hook="item-title"] span {
+  color: var(--abc-berry) !important;
+  font-family: var(--abc-font-body) !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  letter-spacing: 0.01em !important;
+  text-align: center !important;
+}
+
+/* Force display font on key homepage headings */
+#comp-l1z0qnl8 h1,
+#comp-l1z0qnl8 h2,
+#comp-l1z0qnl8 .wixui-rich-text__text,
+#comp-kkngirfd h1,
+#comp-kkngirfd .wixui-rich-text__text,
+#comp-kkngirfd span,
+#comp-lcmrkmdf h1,
+#comp-lcmrkmdf h2,
+#comp-lcmrkmdf .wixui-rich-text__text,
+#comp-lcmrkmdf span {
+  font-family: var(--abc-font-display) !important;
+  font-weight: 600 !important;
+  color: var(--abc-berry) !important;
+}
+
+/* Soften hero carousel corners slightly */
+#abc-hero-carousel,
+.abc-hero-carousel {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Footer — soft editorial */
 #SITE_FOOTER {
   --bg: var(--color_11) !important;
   --bgctr: var(--color_11) !important;
   --bg-overlay-color: var(--abc-white) !important;
   background-color: var(--abc-white) !important;
+  border-top: 1px solid rgba(162, 32, 82, 0.1) !important;
 }
 
 #bgLayers_SITE_FOOTER .LNYVZi,
@@ -553,9 +751,26 @@ body.abc-lightbox-open {
 #SITE_FOOTER a,
 #SITE_FOOTER a span {
   color: var(--abc-footer-text) !important;
+  font-family: var(--abc-font-body) !important;
 }
 
 #SITE_FOOTER a:hover,
 #SITE_FOOTER a:hover span {
   color: var(--abc-berry) !important;
+}
+
+/* Beat Wix inline font-family:raleway on spans */
+span[style*="font-family:raleway"],
+span[style*="font-family: raleway"],
+.wixui-rich-text__text[style*="font-family"] {
+  font-family: var(--abc-font-body) !important;
+}
+
+h1 span[style*="font-family:raleway"],
+h2 span[style*="font-family:raleway"],
+h1 span[style*="font-family: raleway"],
+h2 span[style*="font-family: raleway"],
+h1.font_0 span,
+h2.font_2 span {
+  font-family: var(--abc-font-display) !important;
 }
