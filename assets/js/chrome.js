@@ -37,6 +37,18 @@
     return page === "index.html" || page === "";
   }
 
+  function isContact() {
+    return pageName() === "contact.html";
+  }
+
+  function isOrder() {
+    return pageName() === "order.html";
+  }
+
+  function isAllGalleries() {
+    return pageName() === "all.html";
+  }
+
   function isActive(href) {
     var page = pageName();
     if (href === "index.html") return isHome();
@@ -72,12 +84,10 @@
 
     var brandCluster =
       '<div class="abc-chrome-brand-cluster">' +
-        (isHome()
-          ? ""
-          : '<img class="abc-chrome-kosher" src="' + kosherSrc + '" alt="Kosher Miami" width="72" height="72" />') +
         '<a class="abc-chrome-brand" href="index.html" aria-label="Au Bon Cake home">' +
           '<img src="' + girlSrc + '" alt="Au Bon Cake" />' +
         "</a>" +
+        '<img class="abc-chrome-kosher" src="' + kosherSrc + '" alt="Kosher Miami" width="72" height="72" />' +
       "</div>";
 
     var chrome = document.createElement("header");
@@ -126,6 +136,49 @@
         }
       });
     }
+
+    syncChromeKosherSize(chrome);
+  }
+
+  /** Match KM seal height to the Au Bon Cake brand image (girl + wordmark).
+   *  Mobile: size both to fill the chrome row (KM square = brand height).
+   *  Desktop: brand keeps CSS width; KM height follows measured brand height.
+   */
+  function syncChromeKosherSize(root) {
+    var chrome = root || document.getElementById("abc-site-chrome");
+    if (!chrome) return;
+    var cluster = chrome.querySelector(".abc-chrome-brand-cluster");
+    var brand = chrome.querySelector(".abc-chrome-brand img");
+    var kosher = chrome.querySelector(".abc-chrome-kosher");
+    if (!cluster || !brand || !kosher) return;
+
+    function apply() {
+      var isNarrow = window.matchMedia("(max-width: 900px)").matches;
+      if (isNarrow) {
+        var gap = 8;
+        var avail = cluster.clientWidth;
+        if (avail < 40) return;
+        /* brandW + gap + (brandW * 68/259) = avail — logo is 259×68 */
+        var brandW = (avail - gap) / (1 + 68 / 259);
+        var h = brandW * (68 / 259);
+        brand.style.width = Math.floor(brandW) + "px";
+        brand.style.maxWidth = "none";
+        kosher.style.width = Math.round(h) + "px";
+        kosher.style.height = Math.round(h) + "px";
+        return;
+      }
+
+      brand.style.width = "";
+      brand.style.maxWidth = "";
+      var h = Math.round(brand.getBoundingClientRect().height);
+      if (h < 8) return;
+      kosher.style.width = h + "px";
+      kosher.style.height = h + "px";
+    }
+
+    apply();
+    if (!brand.complete) brand.addEventListener("load", apply, { once: true });
+    if (!kosher.complete) kosher.addEventListener("load", apply, { once: true });
   }
 
   function lowercaseArtisticDesserts(root) {
@@ -142,7 +195,6 @@
     if (document.getElementById("abc-editorial-hero")) return;
 
     var kosher = document.getElementById("comp-l3chwh8b");
-    var title = document.getElementById("comp-kkngirfd");
     var carousel =
       document.getElementById("abc-hero-carousel") ||
       document.querySelector(".abc-hero-carousel") ||
@@ -154,7 +206,10 @@
     section.innerHTML =
       '<div class="abc-editorial-copy">' +
         '<div class="abc-editorial-kosher-slot"></div>' +
-        '<div class="abc-editorial-title-slot"></div>' +
+        '<div class="abc-editorial-title-slot">' +
+          '<h1 class="abc-editorial-heading">Kosher Custom<br />Cakes &amp; Cookies</h1>' +
+          '<p class="abc-editorial-lede">Artistic, certified kosher cakes and cookies in Miami Beach, FL — Jewish themes, weddings, celebrations, and more.</p>' +
+        "</div>" +
         '<div class="abc-editorial-actions">' +
           '<a class="abc-hero-cta-btn" href="order.html">' +
             "<span>Click to Order</span>" +
@@ -166,20 +221,12 @@
       '<div class="abc-editorial-media"></div>';
 
     var kosherSlot = section.querySelector(".abc-editorial-kosher-slot");
-    var titleSlot = section.querySelector(".abc-editorial-title-slot");
     var mediaSlot = section.querySelector(".abc-editorial-media");
 
     if (kosher) kosherSlot.appendChild(kosher);
     else {
       kosherSlot.innerHTML =
         '<img class="abc-editorial-kosher-img" src="./assets/images/logo-kosher-miami.png" alt="Kosher Miami" />';
-    }
-
-    if (title) {
-      titleSlot.appendChild(title);
-      lowercaseArtisticDesserts(title);
-    } else {
-      titleSlot.innerHTML = '<h1 class="abc-editorial-heading">artistic desserts</h1>';
     }
 
     if (carousel) mediaSlot.appendChild(carousel);
@@ -197,18 +244,294 @@
       else document.body.insertBefore(section, document.body.firstChild);
     }
 
+    // Hide emptied Wix hero shells + the tall Instagram spacer that caused dead space
     [
       document.getElementById("comp-l1z1qig2"),
       document.getElementById("comp-kkn397b6"),
       document.getElementById("abc-hero-cta"),
       document.getElementById("comp-kkngirf5"),
+      document.getElementById("comp-kkngirfd"),
       document.getElementById("comp-l1z0qnl8"),
-      document.getElementById("comp-mqzh07h71")
+      document.getElementById("comp-mqzh07h7"),
+      document.getElementById("comp-mqzh07h71"),
+      document.getElementById("comp-mqzgzh8t"),
+      document.getElementById("comp-mqzgzhfu")
     ].forEach(function (el) {
       if (el) el.classList.add("abc-relocated-source");
     });
 
     document.documentElement.classList.add("abc-editorial-home");
+  }
+
+  function composeOrderPage() {
+    if (!isOrder()) return;
+    if (document.getElementById("abc-order-band")) return;
+
+    var section = document.createElement("section");
+    section.id = "abc-order-band";
+    section.className = "abc-order-band";
+    section.innerHTML =
+      '<div class="abc-order-copy">' +
+        '<p class="abc-order-eyebrow">Order</p>' +
+        '<h1 class="abc-order-heading">Let&rsquo;s Discuss Your Order</h1>' +
+        '<p class="abc-order-lede">Everything is Custom! So a consultation with Nathalie is the first step to making an order.</p>' +
+        '<ul class="abc-order-list">' +
+          "<li>Parve (dairy-free) cakes.</li>" +
+          "<li>Final costs will be quoted after consultation as prices vary based on complexity and size.</li>" +
+          "<li>Most orders are booked several weeks in advance, so we recommend contacting us as early as possible.</li>" +
+          "<li>Short-notice orders can often still be accommodated.</li>" +
+          "<li>Kosher Certification under Kosher Miami</li>" +
+          "<li>We have Gluten Free and Passover options.</li>" +
+        "</ul>" +
+        '<div class="abc-order-details">' +
+          '<a class="abc-order-detail" href="mailto:nathalie@AuBonCake.com">' +
+            '<span class="abc-order-label">Contact Nathalie</span>' +
+            '<span class="abc-order-value">nathalie@AuBonCake.com</span>' +
+          "</a>" +
+          '<a class="abc-order-detail" href="tel:+12158022253">' +
+            '<span class="abc-order-label">Call or WhatsApp</span>' +
+            '<span class="abc-order-value">215 802-2253</span>' +
+          "</a>" +
+        "</div>" +
+        '<div class="abc-order-actions">' +
+          '<a class="abc-order-cta" href="mailto:nathalie@AuBonCake.com">Email Nathalie</a>' +
+          '<a class="abc-order-ghost" href="https://wa.me/12158022253" target="_blank" rel="noopener">WhatsApp</a>' +
+        "</div>" +
+      "</div>" +
+      '<div class="abc-order-media" aria-hidden="true">' +
+        '<img class="abc-order-photo" src="./assets/images/order-hero.jpg" alt="" />' +
+      "</div>";
+
+    var main = document.getElementById("PAGES_CONTAINER");
+    var sitePages = document.getElementById("SITE_PAGES");
+    if (main && sitePages) main.insertBefore(section, sitePages);
+    else if (sitePages && sitePages.parentElement) sitePages.parentElement.insertBefore(section, sitePages);
+    else document.body.insertBefore(section, document.body.firstChild);
+
+    [
+      document.getElementById("comp-kkkohipj1"),
+      document.getElementById("comp-l3chzrnt"),
+      document.getElementById("comp-l3chzrmh"),
+      document.getElementById("comp-l3chzrn0"),
+      document.getElementById("comp-l3chzrlx")
+    ].forEach(function (el) {
+      if (el) el.classList.add("abc-relocated-source");
+    });
+
+    document.documentElement.classList.add("abc-order-page");
+  }
+
+  function composeContactPage() {
+    if (!isContact()) return;
+    if (document.getElementById("abc-contact-band")) return;
+
+    var photo = document.getElementById("comp-kkr3u14l");
+    var section = document.createElement("section");
+    section.id = "abc-contact-band";
+    section.className = "abc-contact-band";
+    section.innerHTML =
+      '<div class="abc-contact-copy">' +
+        '<p class="abc-contact-eyebrow">Contact</p>' +
+        '<h1 class="abc-contact-heading">We&rsquo;re Listening</h1>' +
+        '<p class="abc-contact-lede">To discuss an order or anything else — Nathalie would love to hear from you.</p>' +
+        '<div class="abc-contact-details">' +
+          '<a class="abc-contact-detail" href="mailto:orders@auboncake.com">' +
+            '<span class="abc-contact-label">Email</span>' +
+            '<span class="abc-contact-value">orders@auboncake.com</span>' +
+          "</a>" +
+          '<a class="abc-contact-detail" href="tel:+12158022253">' +
+            '<span class="abc-contact-label">Call or WhatsApp</span>' +
+            '<span class="abc-contact-value">215 802-2253</span>' +
+          "</a>" +
+        "</div>" +
+        '<div class="abc-contact-actions">' +
+          '<a class="abc-contact-cta" href="mailto:orders@auboncake.com">Email Nathalie</a>' +
+          '<a class="abc-contact-ghost" href="https://wa.me/12158022253" target="_blank" rel="noopener">WhatsApp</a>' +
+        "</div>" +
+      "</div>" +
+      '<div class="abc-contact-media" aria-hidden="true"></div>';
+
+    var media = section.querySelector(".abc-contact-media");
+    if (photo) media.appendChild(photo);
+    else {
+      media.innerHTML =
+        '<img src="./assets/images/contact-microphone.jpg" alt="" class="abc-contact-photo" />';
+    }
+
+    var main = document.getElementById("PAGES_CONTAINER");
+    var sitePages = document.getElementById("SITE_PAGES");
+    if (main && sitePages) main.insertBefore(section, sitePages);
+    else if (sitePages && sitePages.parentElement) sitePages.parentElement.insertBefore(section, sitePages);
+    else document.body.insertBefore(section, document.body.firstChild);
+
+    [
+      document.getElementById("comp-kkkics5n4"),
+      document.getElementById("comp-kkkics5n2"),
+      document.getElementById("comp-kkkics5n5"),
+      document.getElementById("comp-kkkics5m"),
+      document.getElementById("comp-kkkics5n"),
+      document.getElementById("comp-mqzh8mo6")
+    ].forEach(function (el) {
+      if (el) el.classList.add("abc-relocated-source");
+    });
+
+    document.documentElement.classList.add("abc-contact-page");
+  }
+
+  function normalizeSiteShell() {
+    document.documentElement.classList.add("abc-site");
+    if (isHome()) document.documentElement.classList.add("abc-editorial-home");
+    if (isContact()) document.documentElement.classList.add("abc-contact-page");
+    if (isOrder()) document.documentElement.classList.add("abc-order-page");
+    if (isAllGalleries()) document.documentElement.classList.add("abc-all-galleries-page");
+
+    [
+      document.getElementById("SITE_PAGES"),
+      document.getElementById("SITE_PAGES_TRANSITION_GROUP"),
+      document.getElementById("PAGES_CONTAINER"),
+      document.getElementById("masterPage"),
+      document.getElementById("site-root"),
+      document.getElementById("SITE_CONTAINER"),
+      document.querySelector(".wixui-page"),
+      document.querySelector("[id^='pageBackground_']")
+    ].forEach(function (el) {
+      if (!el) return;
+      el.style.setProperty("height", "auto", "important");
+      el.style.setProperty("min-height", "0", "important");
+      el.style.setProperty("min-width", "0", "important");
+      el.style.setProperty("max-width", "100%", "important");
+    });
+
+    // Any page root (Wix page ids vary)
+    document.querySelectorAll("[id^='pageBackground_'], .wixui-page, [data-mesh-id$='inlineContent-gridContainer']").forEach(function (el) {
+      el.style.setProperty("min-width", "0", "important");
+    });
+  }
+
+  function clearAbsoluteItem(el) {
+    el.style.setProperty("position", "relative", "important");
+    el.style.setProperty("left", "auto", "important");
+    el.style.setProperty("top", "auto", "important");
+    el.style.setProperty("right", "auto", "important");
+    el.style.setProperty("bottom", "auto", "important");
+    el.style.setProperty("width", "100%", "important");
+    el.style.setProperty("height", "auto", "important");
+    el.style.setProperty("overflow", "hidden", "important");
+  }
+
+  function layoutProGalleries() {
+    var isNarrow = window.matchMedia("(max-width: 900px)").matches;
+    var margins = document.querySelectorAll(".pro-gallery-margin-container");
+
+    margins.forEach(function (margin) {
+      // Skip broken/hidden Wix hero shell on homepage
+      if (margin.closest(".abc-relocated-source, #comp-kkn1m2n6")) return;
+
+      var isTheme =
+        margin.id === "pro-gallery-margin-container-comp-lcmrjr9o" ||
+        margin.id === "pro-gallery-margin-container-comp-l7wq5yam";
+      margin.classList.add("abc-pro-gallery-grid");
+      if (isTheme) margin.classList.add("abc-theme-gallery-grid");
+
+      margin.style.setProperty("width", "100%", "important");
+      margin.style.setProperty("max-width", "1120px", "important");
+      margin.style.setProperty("height", "auto", "important");
+      margin.style.setProperty("margin", "0 auto", "important");
+      margin.style.setProperty("position", "relative", "important");
+      margin.style.setProperty("overflow", "visible", "important");
+
+      margin.querySelectorAll(".item-link-wrapper").forEach(function (wrap) {
+        wrap.style.setProperty("display", "block", "important");
+        wrap.style.setProperty("position", "relative", "important");
+        wrap.style.setProperty("width", "100%", "important");
+        wrap.style.setProperty("height", "auto", "important");
+      });
+
+      margin.querySelectorAll(".gallery-item-container").forEach(function (el) {
+        clearAbsoluteItem(el);
+        if (isTheme) el.style.setProperty("overflow", "visible", "important");
+      });
+
+      margin.querySelectorAll(".gallery-item-wrapper, .gallery-item-content, [data-hook='item-wrapper'], .item-hover-flex-container, .gallery-item-hover").forEach(function (el) {
+        el.style.setProperty("width", "100%", "important");
+        el.style.removeProperty("height");
+        if (!isTheme) {
+          el.style.setProperty("height", "auto", "important");
+          el.style.setProperty("aspect-ratio", "1 / 1", "important");
+        }
+      });
+
+      margin.querySelectorAll("img[data-hook='gallery-item-image-img'], .gallery-item-visible img, .gallery-item img").forEach(function (el) {
+        el.style.setProperty("width", "100%", "important");
+        el.style.setProperty("height", "100%", "important");
+        el.style.setProperty("object-fit", "cover", "important");
+        el.style.setProperty("border-radius", "0", "important");
+      });
+
+      if (isTheme) {
+        margin.querySelectorAll(".gallery-item-common-info-outer, .gallery-item-common-info, .gallery-item-bottom-info").forEach(function (el) {
+          if (isNarrow) {
+            el.style.setProperty("height", "39px", "important");
+            el.style.setProperty("min-height", "39px", "important");
+            el.style.setProperty("max-height", "39px", "important");
+          } else {
+            el.style.removeProperty("height");
+            el.style.removeProperty("min-height");
+            el.style.removeProperty("max-height");
+          }
+        });
+        margin.querySelectorAll(".info-element-title, .info-element-title span, [data-hook='item-title'], [data-hook='item-title'] span").forEach(function (el) {
+          if (isNarrow) {
+            el.style.setProperty("line-height", "1.05", "important");
+            el.style.setProperty("font-size", "10px", "important");
+          } else {
+            el.style.removeProperty("line-height");
+            el.style.removeProperty("font-size");
+          }
+        });
+        margin.querySelectorAll(".info-element-text").forEach(function (el) {
+          if (isNarrow) {
+            el.style.setProperty("height", "39px", "important");
+            el.style.setProperty("min-height", "39px", "important");
+            el.style.setProperty("padding", "3px", "important");
+          } else {
+            el.style.removeProperty("height");
+            el.style.removeProperty("min-height");
+            el.style.removeProperty("padding");
+          }
+        });
+      }
+
+      var root = margin.closest("[id^='comp-']") || margin.parentElement;
+      var chain = [
+        margin,
+        margin.closest(".pro-gallery"),
+        margin.closest("[id^='pro-gallery-container']"),
+        margin.closest("[id^='gallery-wrapper']"),
+        root
+      ];
+      chain.forEach(function (el) {
+        if (!el) return;
+        el.style.setProperty("height", "auto", "important");
+        el.style.setProperty("min-width", "0", "important");
+        el.style.setProperty("width", "100%", "important");
+        el.style.setProperty("max-width", isNarrow ? "100%" : "1120px", "important");
+        el.style.setProperty("left", "auto", "important");
+        el.style.setProperty("margin-left", "auto", "important");
+        el.style.setProperty("margin-right", "auto", "important");
+      });
+    });
+
+    // Theme gallery outer shells (homepage + All Galleries)
+    ["comp-lcmrjr9o", "comp-l7wq5yam"].forEach(function (id) {
+      var themeGal = document.getElementById(id);
+      if (!themeGal) return;
+      themeGal.style.setProperty("width", isNarrow ? "calc(100% - 24px)" : "min(1120px, calc(100% - 48px))", "important");
+      themeGal.style.setProperty("max-width", isNarrow ? "100%" : "1120px", "important");
+      themeGal.style.setProperty("margin", isNarrow ? "0 auto 20px" : "0 auto 24px", "important");
+      themeGal.style.setProperty("left", "auto", "important");
+      themeGal.style.setProperty("height", "auto", "important");
+    });
   }
 
   function scrubWixDust() {
@@ -223,11 +546,95 @@
     });
   }
 
+  function layoutOrderMobileColumns() {
+    if (!isOrder()) return;
+    var isNarrow = window.matchMedia("(max-width: 900px)").matches;
+    var strips = document.querySelectorAll(
+      ".abc-order-page .wixui-column-strip, #comp-kkkqb87n6, #comp-kkkr9wv71, #comp-kkkr9wv710, #comp-kkkouh4e12"
+    );
+
+    strips.forEach(function (strip) {
+      var columns = strip.querySelector('[data-testid="columns"]') || strip.querySelector(".Ak0vpt");
+      var cols = columns
+        ? columns.querySelectorAll(":scope > .wixui-column-strip__column, :scope > .FDI5TK")
+        : [];
+
+      if (!isNarrow) {
+        strip.style.removeProperty("flex-direction");
+        strip.style.removeProperty("height");
+        if (columns) {
+          columns.style.removeProperty("flex-direction");
+          columns.style.removeProperty("height");
+          columns.style.removeProperty("gap");
+        }
+        cols.forEach(function (col) {
+          col.style.removeProperty("width");
+          col.style.removeProperty("max-width");
+          col.style.removeProperty("flex");
+          col.style.removeProperty("flex-basis");
+          col.style.removeProperty("height");
+        });
+        return;
+      }
+
+      strip.style.setProperty("display", "flex", "important");
+      strip.style.setProperty("flex-direction", "column", "important");
+      strip.style.setProperty("height", "auto", "important");
+      strip.style.setProperty("width", "100%", "important");
+      strip.style.setProperty("min-width", "0", "important");
+
+      if (columns) {
+        columns.style.setProperty("display", "flex", "important");
+        columns.style.setProperty("flex-direction", "column", "important");
+        columns.style.setProperty("height", "auto", "important");
+        columns.style.setProperty("width", "100%", "important");
+        columns.style.setProperty("gap", "20px", "important");
+      }
+
+      cols.forEach(function (col) {
+        col.style.setProperty("width", "100%", "important");
+        col.style.setProperty("max-width", "100%", "important");
+        col.style.setProperty("min-width", "0", "important");
+        col.style.setProperty("flex", "0 0 auto", "important");
+        col.style.setProperty("height", "auto", "important");
+        col.style.setProperty("--column-width", "100%");
+        col.style.setProperty("--column-flex", "100");
+      });
+    });
+
+    document.querySelectorAll('.abc-order-page img[src*="cake-servings-chart"]').forEach(function (img) {
+      if (!isNarrow) {
+        img.style.removeProperty("width");
+        img.style.removeProperty("max-width");
+        img.style.removeProperty("height");
+        img.style.removeProperty("object-fit");
+        return;
+      }
+      img.style.setProperty("width", "100%", "important");
+      img.style.setProperty("max-width", "100%", "important");
+      img.style.setProperty("height", "auto", "important");
+      img.style.setProperty("object-fit", "contain", "important");
+    });
+  }
+
+  function refreshLayout() {
+    normalizeSiteShell();
+    layoutProGalleries();
+    layoutOrderMobileColumns();
+    syncChromeKosherSize();
+  }
+
   function init() {
     scrubWixDust();
     buildChrome();
     lowercaseArtisticDesserts();
     composeEditorialHero();
+    composeOrderPage();
+    composeContactPage();
+    refreshLayout();
+    window.setTimeout(refreshLayout, 300);
+    window.setTimeout(refreshLayout, 1000);
+    window.addEventListener("resize", refreshLayout);
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);

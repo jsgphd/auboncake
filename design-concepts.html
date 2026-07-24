@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Au Bon Cake — UI Concept Directions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Instrument+Sans:wght@400;500;600&family=Outfit:wght@400;500;600;700&family=Playfair+Display:wght@500;600&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #1a1a1a;
+      color: #fff;
+      font-family: system-ui, sans-serif;
+      padding: 32px 24px 80px;
+    }
+    .intro {
+      max-width: 1100px;
+      margin: 0 auto 36px;
+    }
+    .intro h1 {
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .intro p {
+      color: #b0b0b0;
+      font-size: 15px;
+      line-height: 1.5;
+      max-width: 640px;
+    }
+    .concepts {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .concept-label {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+    .concept-label .tag {
+      background: #fff;
+      color: #111;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 4px 10px;
+      text-transform: uppercase;
+    }
+    .concept-label h2 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .concept-label span {
+      color: #888;
+      font-size: 13px;
+    }
+    .frame {
+      border: 1px solid #333;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+    }
+
+    /* Shared mock chrome */
+    .mock {
+      width: 100%;
+      min-height: 720px;
+    }
+    .mock-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 40px;
+      gap: 24px;
+    }
+    .mock-brand {
+      font-size: 22px;
+      white-space: nowrap;
+    }
+    .mock-links {
+      display: flex;
+      gap: 22px;
+      font-size: 13px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+    .mock-links a {
+      text-decoration: none;
+      color: inherit;
+    }
+    .mock-accent-bar {
+      height: 8px;
+      width: 100%;
+    }
+    .mock-hero {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 40px;
+      padding: 48px 40px 40px;
+      align-items: center;
+    }
+    .mock-hero-copy h1 {
+      font-size: clamp(36px, 4.2vw, 52px);
+      line-height: 1.08;
+      margin-bottom: 14px;
+    }
+    .mock-hero-copy p {
+      font-size: 15px;
+      line-height: 1.55;
+      max-width: 38ch;
+      margin-bottom: 28px;
+      opacity: 0.85;
+    }
+    .mock-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+    }
+    .mock-hero-visual {
+      aspect-ratio: 5/4;
+      position: relative;
+      overflow: hidden;
+      background: #eee center/cover no-repeat;
+    }
+    .mock-hero-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .mock-section {
+      padding: 36px 40px 44px;
+    }
+    .mock-section h2 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+    .mock-section .sub {
+      font-size: 14px;
+      opacity: 0.7;
+      margin-bottom: 24px;
+      max-width: 48ch;
+    }
+    .mock-thumbs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .mock-thumb {
+      aspect-ratio: 1;
+      background: #eee center/cover no-repeat;
+      position: relative;
+      overflow: hidden;
+    }
+    .mock-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .mock-thumb-label {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 10px 12px;
+      font-size: 12px;
+      text-align: center;
+    }
+    .mock-footer {
+      padding: 28px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* ========== CURRENT ========== */
+    .c0 {
+      background: #fbfbfb;
+      color: #140b0a;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .c0 .mock-brand { font-weight: 700; letter-spacing: 0.04em; }
+    .c0 .mock-links { font-size: 12px; letter-spacing: 0.02em; }
+    .c0 .mock-accent-bar { background: #a22052; height: 10px; }
+    .c0 .mock-hero-copy h1 { font-size: 36px; font-weight: 700; }
+    .c0 .mock-cta {
+      background: #a22052;
+      color: #fff;
+      border-radius: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 700;
+    }
+    .c0 .mock-section { background: #fafafa; }
+    .c0 .mock-section h2 { color: #a22052; font-size: 26px; }
+    .c0 .mock-thumb-label {
+      background: #d7b3af;
+      color: #140b0a;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .c0 .mock-footer { background: #fff; color: #292929; border-top: 1px solid #eee; }
+
+    /* ========== A: Refined Atelier ========== */
+    .cA {
+      background: linear-gradient(180deg, #faf6f4 0%, #f7f1ef 40%, #f3ebe8 100%);
+      color: #2a1816;
+      font-family: "DM Sans", sans-serif;
+    }
+    .cA .mock-brand {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .cA .mock-links {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: #5a403c;
+    }
+    .cA .mock-accent-bar {
+      height: 3px;
+      background: #8e1c48;
+    }
+    .cA .mock-hero-copy h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 600;
+      font-size: clamp(40px, 4.8vw, 56px);
+      letter-spacing: -0.01em;
+      color: #8e1c48;
+    }
+    .cA .mock-hero-copy p {
+      font-weight: 400;
+      color: #5a403c;
+    }
+    .cA .mock-cta {
+      background: #8e1c48;
+      color: #fff;
+      border-radius: 2px;
+      font-family: "DM Sans", sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      padding: 16px 32px;
+      box-shadow: 0 1px 0 rgba(142, 28, 72, 0.2);
+    }
+    .cA .mock-hero-visual {
+      border-radius: 2px;
+    }
+    .cA .mock-section {
+      background: transparent;
+      border-top: 1px solid rgba(142, 28, 72, 0.12);
+    }
+    .cA .mock-section h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 600;
+      color: #8e1c48;
+      font-size: 34px;
+    }
+    .cA .mock-thumb {
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .cA .mock-thumb-label {
+      background: rgba(250, 246, 244, 0.92);
+      color: #8e1c48;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 500;
+      border-top: 1px solid rgba(142, 28, 72, 0.15);
+    }
+    .cA .mock-footer {
+      background: #2a1816;
+      color: #f7f1ef;
+    }
+
+    /* ========== B: Miami Modern ========== */
+    .cB {
+      background: #ffffff;
+      color: #161012;
+      font-family: "Outfit", sans-serif;
+    }
+    .cB .mock-nav {
+      border-bottom: 1px solid #eee;
+      padding-top: 22px;
+      padding-bottom: 22px;
+    }
+    .cB .mock-brand {
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .cB .mock-links {
+      font-size: 13px;
+      font-weight: 500;
+      color: #4a3a3d;
+      gap: 28px;
+    }
+    .cB .mock-accent-bar {
+      height: 6px;
+      background: linear-gradient(90deg, #c2185b, #e85a8a 55%, #f2a0b8);
+    }
+    .cB .mock-hero {
+      background: linear-gradient(135deg, #fff 0%, #fff5f8 55%, #ffe8ef 100%);
+    }
+    .cB .mock-hero-copy h1 {
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      font-size: clamp(38px, 4.5vw, 54px);
+    }
+    .cB .mock-cta {
+      background: #c2185b;
+      color: #fff;
+      border-radius: 8px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      padding: 15px 30px;
+    }
+    .cB .mock-hero-visual {
+      border-radius: 12px;
+    }
+    .cB .mock-section {
+      background: #fafafa;
+    }
+    .cB .mock-section h2 {
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      font-size: 30px;
+      color: #161012;
+    }
+    .cB .mock-thumb {
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .cB .mock-thumb-label {
+      background: #c2185b;
+      color: #fff;
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .cB .mock-footer {
+      background: #161012;
+      color: #fff;
+    }
+
+    /* ========== C: Soft Confection ========== */
+    .cC {
+      background: #fff8fb;
+      color: #3d2030;
+      font-family: "Source Sans 3", sans-serif;
+    }
+    .cC .mock-nav {
+      background: #fff;
+      box-shadow: 0 1px 0 rgba(162, 32, 82, 0.08);
+    }
+    .cC .mock-brand {
+      font-family: "Playfair Display", serif;
+      font-weight: 600;
+      font-size: 26px;
+      color: #a22052;
+    }
+    .cC .mock-links {
+      font-size: 14px;
+      font-weight: 500;
+      color: #6b4455;
+    }
+    .cC .mock-accent-bar {
+      height: 0;
+      background: transparent;
+    }
+    .cC .mock-hero-copy h1 {
+      font-family: "Playfair Display", serif;
+      font-weight: 600;
+      color: #a22052;
+      font-size: clamp(38px, 4.4vw, 52px);
+    }
+    .cC .mock-cta {
+      background: transparent;
+      color: #a22052;
+      border: 2px solid #a22052;
+      border-radius: 999px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      padding: 13px 30px;
+    }
+    .cC .mock-hero-visual {
+      border-radius: 24px;
+    }
+    .cC .mock-section {
+      background: #fff;
+    }
+    .cC .mock-section h2 {
+      font-family: "Playfair Display", serif;
+      color: #a22052;
+      font-size: 32px;
+      font-weight: 600;
+    }
+    .cC .mock-thumb {
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .cC .mock-thumb-label {
+      background: rgba(255, 248, 251, 0.95);
+      color: #a22052;
+      font-weight: 600;
+      border-radius: 0 0 16px 16px;
+    }
+    .cC .mock-footer {
+      background: #fceef3;
+      color: #3d2030;
+    }
+
+    /* ========== D: Gallery Editorial ========== */
+    .cD {
+      background: #fcfcfb;
+      color: #1c1412;
+      font-family: "Instrument Sans", sans-serif;
+    }
+    .cD .mock-nav {
+      padding-top: 28px;
+      padding-bottom: 20px;
+    }
+    .cD .mock-brand {
+      font-family: "Fraunces", serif;
+      font-weight: 600;
+      font-size: 24px;
+      letter-spacing: -0.01em;
+    }
+    .cD .mock-links {
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: #5c504c;
+      gap: 26px;
+    }
+    .cD .mock-accent-bar {
+      height: 1px;
+      background: #1c1412;
+      opacity: 0.15;
+    }
+    .cD .mock-hero {
+      padding-top: 56px;
+      padding-bottom: 56px;
+    }
+    .cD .mock-hero-copy h1 {
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: clamp(40px, 5vw, 58px);
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      margin-bottom: 18px;
+    }
+    .cD .mock-hero-copy p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #5c504c;
+      max-width: 36ch;
+    }
+    .cD .mock-cta {
+      background: #a22052;
+      color: #fff;
+      border-radius: 0;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      padding: 16px 28px;
+      margin-right: 16px;
+    }
+    .cD .mock-cta-ghost {
+      display: inline-flex;
+      align-items: center;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #1c1412;
+      border-bottom: 1px solid #1c1412;
+      padding-bottom: 4px;
+      font-weight: 500;
+    }
+    .cD .mock-hero-visual {
+      background:
+        linear-gradient(180deg, #e9ddd8, #c9a8a0 60%, #9a6b6a);
+    }
+    .cD .mock-section {
+      background: #f4f0ee;
+      padding-top: 48px;
+      padding-bottom: 56px;
+    }
+    .cD .mock-section h2 {
+      font-family: "Fraunces", serif;
+      font-weight: 500;
+      font-size: 36px;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .cD .mock-thumbs { gap: 20px; }
+    .cD .mock-thumb {
+      background: #ddd;
+    }
+    .cD .mock-thumb-label {
+      position: static;
+      background: transparent;
+      color: #1c1412;
+      text-align: left;
+      padding: 10px 0 0;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .cD .mock-thumb-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+    .cD .mock-footer {
+      background: #1c1412;
+      color: #f4f0ee;
+    }
+
+    @media (max-width: 800px) {
+      .mock-hero { grid-template-columns: 1fr; }
+      .mock-thumbs { grid-template-columns: repeat(2, 1fr); }
+      .mock-nav { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="intro">
+    <h1>Au Bon Cake — UI directions</h1>
+    <p>Same content &amp; layout structure. Only colors, fonts, formatting, and buttons change. Choose A–D (or keep Current).</p>
+  </div>
+
+  <div class="concepts">
+
+    <!-- CURRENT -->
+    <section id="current">
+      <div class="concept-label">
+        <span class="tag">Current</span>
+        <h2>As shipped today</h2>
+        <span>Berry #a22052 · Arial · flat CTA · dusty-rose gallery bars</span>
+      </div>
+      <div class="frame">
+        <div class="mock c0">
+          <nav class="mock-nav">
+            <div class="mock-brand">AU BON CAKE</div>
+            <ul class="mock-links">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Galleries</a></li>
+              <li><a href="#">Order</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </nav>
+          <div class="mock-accent-bar"></div>
+          <div class="mock-hero">
+            <div class="mock-hero-copy">
+              <h1>Kosher Custom Cakes &amp; Cookies</h1>
+              <p>Artistic, certified kosher cakes and cookies in Miami Beach — Jewish themes, weddings, celebrations, and more.</p>
+              <button class="mock-cta">Click to Order</button>
+            </div>
+            <div class="mock-hero-visual" aria-hidden="true"><img src="assets/images/hero-lv-bag-cake.jpg" alt="" /></div>
+          </div>
+          <div class="mock-section">
+            <h2>Galleries by Theme</h2>
+            <p class="sub">Browse cakes and cookies by celebration.</p>
+            <div class="mock-thumbs">
+              <div class="mock-thumb"><img src="assets/images/hero-india-wedding.jpg" alt="" /><div class="mock-thumb-label">Weddings</div></div>
+              <div class="mock-thumb"><img src="assets/images/hero-baby-cookies.jpg" alt="" /><div class="mock-thumb-label">Babies</div></div>
+              <div class="mock-thumb"><img src="assets/images/hero-flowers-cake.jpg" alt="" /><div class="mock-thumb-label">For Her</div></div>
+              <div class="mock-thumb"><img src="assets/images/cookies-1.jpg" alt="" /><div class="mock-thumb-label">Cookies</div></div>
+            </div>
+          </div>
+          <footer class="mock-footer">
+            <span>Miami Beach, FL · Certified Kosher</span>
+            <span>Contact us</span>
+          </footer>
+        </div>
+      </div>
+    </section>
+
+    <!-- A -->
+    <section id="concept-a">
+      <div class="concept-label">
+        <span class="tag">A</span>
+        <h2>Refined Atelier</h2>
+        <span>Deeper wine berry · Cormorant + DM Sans · thin accent · dark footer</span>
+      </div>
+      <div class="frame">
+        <div class="mock cA">
+          <nav class="mock-nav">
+            <div class="mock-brand">Au Bon Cake</div>
+            <ul class="mock-links">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Galleries</a></li>
+              <li><a href="#">Order</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </nav>
+          <div class="mock-accent-bar"></div>
+          <div class="mock-hero">
+            <div class="mock-hero-copy">
+              <h1>Kosher Custom Cakes &amp; Cookies</h1>
+              <p>Artistic, certified kosher cakes and cookies in Miami Beach — Jewish themes, weddings, celebrations, and more.</p>
+              <button class="mock-cta">Click to Order</button>
+            </div>
+            <div class="mock-hero-visual" aria-hidden="true"><img src="assets/images/hero-lv-bag-cake.jpg" alt="" /></div>
+          </div>
+          <div class="mock-section">
+            <h2>Galleries by Theme</h2>
+            <p class="sub">Browse cakes and cookies by celebration.</p>
+            <div class="mock-thumbs">
+              <div class="mock-thumb"><img src="assets/images/hero-india-wedding.jpg" alt="" /><div class="mock-thumb-label">Weddings</div></div>
+              <div class="mock-thumb"><img src="assets/images/hero-baby-cookies.jpg" alt="" /><div class="mock-thumb-label">Babies</div></div>
+              <div class="mock-thumb"><img src="assets/images/hero-flowers-cake.jpg" alt="" /><div class="mock-thumb-label">For Her</div></div>
+              <div class="mock-thumb"><img src="assets/images/cookies-1.jpg" alt="" /><div class="mock-thumb-label">Cookies</div></div>
+            </div>
+          </div>
+          <footer class="mock-footer">
+            <span>Miami Beach, FL · Certified Kosher</span>
+            <span>Contact us</span>
+          </footer>
+        </div>
+      </div>
+    </section>
+
+    <!-- B -->
+    <section id="concept-b">
+      <div class="concept-label">
+        <span class="tag">B</span>
+        <h2>Miami Modern</h2>
+        <span>Brighter berry · Outfit sans · soft pink wash · rounded buttons</span>
+      </div>
+      <div class="frame">
+        <div class="mock cB">
+          <nav class="mock-nav">
+            <div class="mock-brand">Au Bon Cake</div>
+            <ul class="mock-links">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Galleries</a></li>
+              <li><a href="#">Order</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </nav>
+          <div class="mock-accent-bar"></div>
+          <div class="mock-hero">
+            <div class="mock-hero-copy">
+              <h1>Kosher Custom Cakes &amp; Cookies</h1>
+              <p>Artistic, certified kosher cakes and cookies in Miami Beach — Jewish themes, weddings, celebrations, and more.</p>
+              <button class="mock-cta">Click to Order</button>
+            </div>
+            <div class="mock-hero-visual" aria-hidden="true"><img src="assets/images/hero-lv-bag-cake.jpg" alt="" /></div>
+          </div>
+          <div class="mock-section">
+            <h2>Galleries by Theme</h2>
+            <p class="sub">Browse cakes and cookies by celebration.</p>
+            <div class="mock-thumbs">
+              <div class="mock-thumb"><img src="assets/images/hero-india-wedding.jpg" alt="" /><div class="mock-thumb-label">Weddings</div></div>
+              <div class="mock-thumb"><img src="assets/images/hero-baby-cookies.jpg" alt="" /><div class="mock-thumb-label">Babies</div></div>
+              <div class="mock-thumb"><img src="assets/images/hero-flowers-cake.jpg" alt="" /><div class="mock-thumb-label">For Her</div></div>
+              <div class="mock-thumb"><img src="assets/images/cookies-1.jpg" alt="" /><div class="mock-thumb-label">Cookies</div></div>
+            </div>
+          </div>
+          <footer class="mock-footer">
+            <span>Miami Beach, FL · Certified Kosher</span>
+            <span>Contact us</span>
+          </footer>
+        </div>
+      </div>
+    </section>
+
+    <!-- C -->
+    <section id="concept-c">
+      <div class="concept-label">
+        <span class="tag">C</span>
+        <h2>Soft Confection</h2>
+        <span>Keep berry · Playfair + Source Sans · pill outline CTA · rosy blush</span>
+      </div>
+      <div class="frame">
+        <div class="mock cC">
+          <nav class="mock-nav">
+            <div class="mock-brand">Au Bon Cake</div>
+            <ul class="mock-links">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Galleries</a></li>
+              <li><a href="#">Order</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </nav>
+          <div class="mock-accent-bar"></div>
+          <div class="mock-hero">
+            <div class="mock-hero-copy">
+              <h1>Kosher Custom Cakes &amp; Cookies</h1>
+              <p>Artistic, certified kosher cakes and cookies in Miami Beach — Jewish themes, weddings, celebrations, and more.</p>
+              <button class="mock-cta">Click to Order</button>
+            </div>
+            <div class="mock-hero-visual" aria-hidden="true"><img src="assets/images/hero-lv-bag-cake.jpg" alt="" /></div>
+          </div>
+          <div class="mock-section">
+            <h2>Galleries by Theme</h2>
+            <p class="sub">Browse cakes and cookies by celebration.</p>
+            <div class="mock-thumbs">
+              <div class="mock-thumb"><img src="assets/images/hero-india-wedding.jpg" alt="" /><div class="mock-thumb-label">Weddings</div></div>
+              <div class="mock-thumb"><img src="assets/images/hero-baby-cookies.jpg" alt="" /><div class="mock-thumb-label">Babies</div></div>
+              <div class="mock-thumb"><img src="assets/images/hero-flowers-cake.jpg" alt="" /><div class="mock-thumb-label">For Her</div></div>
+              <div class="mock-thumb"><img src="assets/images/cookies-1.jpg" alt="" /><div class="mock-thumb-label">Cookies</div></div>
+            </div>
+          </div>
+          <footer class="mock-footer">
+            <span>Miami Beach, FL · Certified Kosher</span>
+            <span>Contact us</span>
+          </footer>
+        </div>
+      </div>
+    </section>
+
+    <!-- D -->
+    <section id="concept-d">
+      <div class="concept-label">
+        <span class="tag">D</span>
+        <h2>Gallery Editorial</h2>
+        <span>Fraunces + Instrument Sans · less chrome · caption labels · square CTA</span>
+      </div>
+      <div class="frame">
+        <div class="mock cD">
+          <nav class="mock-nav">
+            <div class="mock-brand">Au Bon Cake</div>
+            <ul class="mock-links">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Galleries</a></li>
+              <li><a href="#">Order</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </nav>
+          <div class="mock-accent-bar"></div>
+          <div class="mock-hero">
+            <div class="mock-hero-copy">
+              <h1>Kosher Custom Cakes &amp; Cookies</h1>
+              <p>Artistic, certified kosher cakes and cookies in Miami Beach — Jewish themes, weddings, celebrations, and more.</p>
+              <button class="mock-cta">Click to Order</button>
+              <a class="mock-cta-ghost" href="#">View galleries</a>
+            </div>
+            <div class="mock-hero-visual" aria-hidden="true"><img src="assets/images/hero-lv-bag-cake.jpg" alt="" /></div>
+          </div>
+          <div class="mock-section">
+            <h2>Galleries by Theme</h2>
+            <p class="sub">Browse cakes and cookies by celebration.</p>
+            <div class="mock-thumbs">
+              <div class="mock-thumb-wrap"><div class="mock-thumb"><img src="assets/images/hero-india-wedding.jpg" alt="" /></div><div class="mock-thumb-label">Weddings</div></div>
+              <div class="mock-thumb-wrap"><div class="mock-thumb"><img src="assets/images/hero-baby-cookies.jpg" alt="" /></div><div class="mock-thumb-label">Babies</div></div>
+              <div class="mock-thumb-wrap"><div class="mock-thumb"><img src="assets/images/hero-flowers-cake.jpg" alt="" /></div><div class="mock-thumb-label">For Her</div></div>
+              <div class="mock-thumb-wrap"><div class="mock-thumb"><img src="assets/images/cookies-1.jpg" alt="" /></div><div class="mock-thumb-label">Cookies</div></div>
+            </div>
+          </div>
+          <footer class="mock-footer">
+            <span>Miami Beach, FL · Certified Kosher</span>
+            <span>Contact us</span>
+          </footer>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>
