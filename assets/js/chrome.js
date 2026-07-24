@@ -87,7 +87,9 @@
         '<a class="abc-chrome-brand" href="index.html" aria-label="Au Bon Cake home">' +
           '<img src="' + girlSrc + '" alt="Au Bon Cake" />' +
         "</a>" +
-        '<img class="abc-chrome-kosher" src="' + kosherSrc + '" alt="Kosher Miami" width="72" height="72" />' +
+        '<a class="abc-chrome-kosher-link" href="https://koshermiami.org/establishments/AuBonCakes" target="_blank" rel="noopener noreferrer" aria-label="Kosher Miami — opens in a new tab">' +
+          '<img class="abc-chrome-kosher" src="' + kosherSrc + '" alt="" width="72" height="72" />' +
+        "</a>" +
       "</div>";
 
     var chrome = document.createElement("header");
@@ -160,16 +162,20 @@
         if (avail < 40) return;
         /* brandW + gap + (brandW * 68/259) = avail — logo is 259×68 */
         var brandW = (avail - gap) / (1 + 68 / 259);
-        var h = brandW * (68 / 259);
         brand.style.width = Math.floor(brandW) + "px";
         brand.style.maxWidth = "none";
-        kosher.style.width = Math.round(h) + "px";
-        kosher.style.height = Math.round(h) + "px";
+        brand.style.height = "auto";
+        /* Measure rendered brand height so KM matches the girl, not a formula guess */
+        var h = Math.round(brand.getBoundingClientRect().height);
+        if (h < 8) h = Math.round(brandW * (68 / 259));
+        kosher.style.width = h + "px";
+        kosher.style.height = h + "px";
         return;
       }
 
       brand.style.width = "";
       brand.style.maxWidth = "";
+      brand.style.height = "";
       var h = Math.round(brand.getBoundingClientRect().height);
       if (h < 8) return;
       kosher.style.width = h + "px";
@@ -194,7 +200,6 @@
     if (!isHome()) return;
     if (document.getElementById("abc-editorial-hero")) return;
 
-    var kosher = document.getElementById("comp-l3chwh8b");
     var carousel =
       document.getElementById("abc-hero-carousel") ||
       document.querySelector(".abc-hero-carousel") ||
@@ -205,30 +210,24 @@
     section.className = "abc-editorial-hero";
     section.innerHTML =
       '<div class="abc-editorial-copy">' +
-        '<div class="abc-editorial-kosher-slot"></div>' +
         '<div class="abc-editorial-title-slot">' +
           '<h1 class="abc-editorial-heading">Kosher Custom<br />Cakes &amp; Cookies</h1>' +
           '<p class="abc-editorial-lede">Artistic, certified kosher cakes and cookies in Miami Beach, FL — Jewish themes, weddings, celebrations, and more.</p>' +
         "</div>" +
         '<div class="abc-editorial-actions">' +
+          '<a class="abc-instagram-promo" href="https://www.instagram.com/au_bon_cake" target="_blank" rel="noopener noreferrer">' +
+            '<img class="abc-instagram-promo-icon" src="./assets/images/icon-instagram.png" alt="" width="20" height="20" />' +
+            "<span>See latest updates on Instagram</span>" +
+          "</a>" +
           '<a class="abc-hero-cta-btn" href="order.html">' +
             "<span>Click to Order</span>" +
             '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h12m0 0-5-5m5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
           "</a>" +
-          '<a class="abc-editorial-ghost" href="all.html">View galleries</a>' +
         "</div>" +
       "</div>" +
       '<div class="abc-editorial-media"></div>';
 
-    var kosherSlot = section.querySelector(".abc-editorial-kosher-slot");
     var mediaSlot = section.querySelector(".abc-editorial-media");
-
-    if (kosher) kosherSlot.appendChild(kosher);
-    else {
-      kosherSlot.innerHTML =
-        '<img class="abc-editorial-kosher-img" src="./assets/images/logo-kosher-miami.png" alt="Kosher Miami" />';
-    }
-
     if (carousel) mediaSlot.appendChild(carousel);
 
     // Place editorial band above the Wix page mesh (avoids uvik8H stacking trap)
@@ -244,7 +243,7 @@
       else document.body.insertBefore(section, document.body.firstChild);
     }
 
-    // Hide emptied Wix hero shells + the tall Instagram spacer that caused dead space
+    // Hide emptied Wix hero shells + KM (now only in chrome) + Instagram spacer
     [
       document.getElementById("comp-l1z1qig2"),
       document.getElementById("comp-kkn397b6"),
@@ -252,6 +251,7 @@
       document.getElementById("comp-kkngirf5"),
       document.getElementById("comp-kkngirfd"),
       document.getElementById("comp-l1z0qnl8"),
+      document.getElementById("comp-l3chwh8b"),
       document.getElementById("comp-mqzh07h7"),
       document.getElementById("comp-mqzh07h71"),
       document.getElementById("comp-mqzgzh8t"),
@@ -261,6 +261,65 @@
     });
 
     document.documentElement.classList.add("abc-editorial-home");
+  }
+
+  /**
+   * Homepage Instagram CTA — live feeds need Meta oEmbed tokens or third-party
+   * widgets; the Wix Instagram iframe (#comp-mqzgzhfu) is empty. Point visitors
+   * to @au_bon_cake instead of inventing fake tiles.
+   */
+  function composeInstagramNotice() {
+    if (!isHome()) return;
+    if (document.getElementById("abc-instagram-notice")) return;
+
+    var section = document.createElement("section");
+    section.id = "abc-instagram-notice";
+    section.className = "abc-instagram-notice";
+    section.setAttribute("aria-labelledby", "abc-instagram-heading");
+    section.innerHTML =
+      '<div class="abc-instagram-inner">' +
+        '<p class="abc-instagram-eyebrow">Follow along</p>' +
+        '<h2 id="abc-instagram-heading" class="abc-instagram-heading">Latest news is on Instagram</h2>' +
+        '<p class="abc-instagram-lede">New cakes, celebrations, and studio moments land on Instagram first — come say hello at @au_bon_cake.</p>' +
+        '<a class="abc-instagram-cta" href="https://www.instagram.com/au_bon_cake" target="_blank" rel="noopener">Visit Instagram</a>' +
+      "</div>";
+
+    var hero = document.getElementById("abc-editorial-hero");
+    var sitePages = document.getElementById("SITE_PAGES");
+    var main = document.getElementById("PAGES_CONTAINER");
+    if (hero && hero.parentElement) {
+      hero.parentElement.insertBefore(section, hero.nextSibling);
+    } else if (main && sitePages) {
+      main.insertBefore(section, sitePages);
+    } else if (sitePages && sitePages.parentElement) {
+      sitePages.parentElement.insertBefore(section, sitePages);
+    } else {
+      document.body.appendChild(section);
+    }
+
+    [
+      document.getElementById("comp-mqzh07h7"),
+      document.getElementById("comp-mqzh07h71"),
+      document.getElementById("comp-mqzgzh8t"),
+      document.getElementById("comp-mqzgzhfu")
+    ].forEach(function (el) {
+      if (el) el.classList.add("abc-relocated-source");
+    });
+  }
+
+  /** “Galleries By Theme” → all.html — plain link, no nav-style underline/visited change */
+  function linkGalleriesByTheme() {
+    if (!isHome()) return;
+    var title = document.getElementById("comp-lcmrkmdf");
+    if (!title || title.querySelector("a.abc-galleries-theme-link")) return;
+
+    var heading = title.querySelector("h2, h1") || title;
+    var link = document.createElement("a");
+    link.className = "abc-galleries-theme-link";
+    link.href = "all.html";
+    link.setAttribute("aria-label", "View all galleries by theme");
+    while (heading.firstChild) link.appendChild(heading.firstChild);
+    heading.appendChild(link);
   }
 
   function composeOrderPage() {
@@ -288,14 +347,16 @@
             '<span class="abc-order-label">Contact Nathalie</span>' +
             '<span class="abc-order-value">nathalie@AuBonCake.com</span>' +
           "</a>" +
-          '<a class="abc-order-detail" href="tel:+12158022253">' +
-            '<span class="abc-order-label">Call or WhatsApp</span>' +
-            '<span class="abc-order-value">215 802-2253</span>' +
-          "</a>" +
-        "</div>" +
-        '<div class="abc-order-actions">' +
-          '<a class="abc-order-cta" href="mailto:nathalie@AuBonCake.com">Email Nathalie</a>' +
-          '<a class="abc-order-ghost" href="https://wa.me/12158022253" target="_blank" rel="noopener">WhatsApp</a>' +
+          '<div class="abc-order-phone-group">' +
+            '<a class="abc-order-detail" href="tel:+12158022253">' +
+              '<span class="abc-order-label">Call or WhatsApp</span>' +
+              '<span class="abc-order-value">215 802-2253</span>' +
+            "</a>" +
+            '<a class="abc-instagram-promo" href="https://www.instagram.com/au_bon_cake" target="_blank" rel="noopener noreferrer">' +
+              '<img class="abc-instagram-promo-icon" src="./assets/images/icon-instagram.png" alt="" width="20" height="20" />' +
+              "<span>See latest updates on Instagram</span>" +
+            "</a>" +
+          "</div>" +
         "</div>" +
       "</div>" +
       '<div class="abc-order-media" aria-hidden="true">' +
@@ -325,7 +386,6 @@
     if (!isContact()) return;
     if (document.getElementById("abc-contact-band")) return;
 
-    var photo = document.getElementById("comp-kkr3u14l");
     var section = document.createElement("section");
     section.id = "abc-contact-band";
     section.className = "abc-contact-band";
@@ -339,24 +399,21 @@
             '<span class="abc-contact-label">Email</span>' +
             '<span class="abc-contact-value">orders@auboncake.com</span>' +
           "</a>" +
-          '<a class="abc-contact-detail" href="tel:+12158022253">' +
-            '<span class="abc-contact-label">Call or WhatsApp</span>' +
-            '<span class="abc-contact-value">215 802-2253</span>' +
-          "</a>" +
-        "</div>" +
-        '<div class="abc-contact-actions">' +
-          '<a class="abc-contact-cta" href="mailto:orders@auboncake.com">Email Nathalie</a>' +
-          '<a class="abc-contact-ghost" href="https://wa.me/12158022253" target="_blank" rel="noopener">WhatsApp</a>' +
+          '<div class="abc-contact-phone-group">' +
+            '<a class="abc-contact-detail" href="tel:+12158022253">' +
+              '<span class="abc-contact-label">Call or WhatsApp</span>' +
+              '<span class="abc-contact-value">215 802-2253</span>' +
+            "</a>" +
+            '<a class="abc-instagram-promo" href="https://www.instagram.com/au_bon_cake" target="_blank" rel="noopener noreferrer">' +
+              '<img class="abc-instagram-promo-icon" src="./assets/images/icon-instagram.png" alt="" width="20" height="20" />' +
+              "<span>See latest updates on Instagram</span>" +
+            "</a>" +
+          "</div>" +
         "</div>" +
       "</div>" +
-      '<div class="abc-contact-media" aria-hidden="true"></div>';
-
-    var media = section.querySelector(".abc-contact-media");
-    if (photo) media.appendChild(photo);
-    else {
-      media.innerHTML =
-        '<img src="./assets/images/contact-microphone.jpg" alt="" class="abc-contact-photo" />';
-    }
+      '<div class="abc-contact-media" aria-hidden="true">' +
+        '<img src="./assets/images/contact-nathalie-cake.jpg" alt="" class="abc-contact-photo" />' +
+      "</div>";
 
     var main = document.getElementById("PAGES_CONTAINER");
     var sitePages = document.getElementById("SITE_PAGES");
@@ -365,6 +422,7 @@
     else document.body.insertBefore(section, document.body.firstChild);
 
     [
+      document.getElementById("comp-kkr3u14l"),
       document.getElementById("comp-kkkics5n4"),
       document.getElementById("comp-kkkics5n2"),
       document.getElementById("comp-kkkics5n5"),
@@ -503,6 +561,8 @@
       }
 
       var root = margin.closest("[id^='comp-']") || margin.parentElement;
+      var isWide = window.matchMedia("(min-width: 1280px)").matches;
+      var deskMax = isTheme && isWide ? "1320px" : "1120px";
       var chain = [
         margin,
         margin.closest(".pro-gallery"),
@@ -515,7 +575,7 @@
         el.style.setProperty("height", "auto", "important");
         el.style.setProperty("min-width", "0", "important");
         el.style.setProperty("width", "100%", "important");
-        el.style.setProperty("max-width", isNarrow ? "100%" : "1120px", "important");
+        el.style.setProperty("max-width", isNarrow ? "100%" : deskMax, "important");
         el.style.setProperty("left", "auto", "important");
         el.style.setProperty("margin-left", "auto", "important");
         el.style.setProperty("margin-right", "auto", "important");
@@ -523,15 +583,93 @@
     });
 
     // Theme gallery outer shells (homepage + All Galleries)
+    var isWide = window.matchMedia("(min-width: 1280px)").matches;
+    var deskWidth = isWide ? "min(1320px, calc(100% - 48px))" : "min(1120px, calc(100% - 48px))";
+    var deskMax = isWide ? "1320px" : "1120px";
     ["comp-lcmrjr9o", "comp-l7wq5yam"].forEach(function (id) {
       var themeGal = document.getElementById(id);
       if (!themeGal) return;
-      themeGal.style.setProperty("width", isNarrow ? "calc(100% - 24px)" : "min(1120px, calc(100% - 48px))", "important");
-      themeGal.style.setProperty("max-width", isNarrow ? "100%" : "1120px", "important");
+      themeGal.style.setProperty("width", isNarrow ? "calc(100% - 24px)" : deskWidth, "important");
+      themeGal.style.setProperty("max-width", isNarrow ? "100%" : deskMax, "important");
       themeGal.style.setProperty("margin", isNarrow ? "0 auto 20px" : "0 auto 24px", "important");
       themeGal.style.setProperty("left", "auto", "important");
       themeGal.style.setProperty("height", "auto", "important");
     });
+
+    layoutAllGalleriesPage();
+  }
+
+  /** Collapse Wix mesh leftovers on all.html: -150px pull-up, empty 1153px column, fixed gallery height */
+  function layoutAllGalleriesPage() {
+    if (!isAllGalleries()) return;
+
+    [
+      document.getElementById("comp-l7wq01hv"),
+      document.getElementById("comp-l7wq01jm")
+    ].forEach(function (el) {
+      if (el) el.classList.add("abc-relocated-source");
+    });
+
+    var meshIds = [
+      "Containerdq0seinlineContent",
+      "Containerdq0seinlineContent-gridContainer",
+      "comp-mqzhan8qinlineContent",
+      "comp-mqzhan8qinlineContent-gridContainer",
+      "comp-l9liymtginlineContent",
+      "comp-l9liymtginlineContent-gridContainer"
+    ];
+    meshIds.forEach(function (mid) {
+      var el = document.querySelector('[data-mesh-id="' + mid + '"]');
+      if (!el) return;
+      el.style.setProperty("margin-top", "0", "important");
+      el.style.setProperty("height", "auto", "important");
+      el.style.setProperty("min-height", "0", "important");
+      if (mid.indexOf("gridContainer") !== -1) {
+        el.style.setProperty("grid-template-rows", "min-content min-content", "important");
+      }
+    });
+
+    [
+      "dq0se",
+      "comp-mqzhan8q",
+      "comp-l7wq5yam",
+      "comp-l9liymrw",
+      "comp-l9liymtg",
+      "gallery-wrapper-comp-l7wq5yam",
+      "pro-gallery-comp-l7wq5yam",
+      "pro-gallery-container-comp-l7wq5yam",
+      "pro-gallery-margin-container-comp-l7wq5yam",
+      "SITE_PAGES",
+      "SITE_PAGES_TRANSITION_GROUP",
+      "PAGES_CONTAINER"
+    ].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.style.setProperty("height", "auto", "important");
+      el.style.setProperty("min-height", "0", "important");
+      el.style.setProperty("min-width", "0", "important");
+      if (id === "comp-l9liymrw" || id === "comp-l9liymtg") {
+        el.style.setProperty("left", "auto", "important");
+        el.style.setProperty("margin-left", "auto", "important");
+        el.style.setProperty("margin-right", "auto", "important");
+        el.style.setProperty("width", "100%", "important");
+        el.style.setProperty("max-width", "1120px", "important");
+      }
+    });
+
+    var gal = document.getElementById("comp-l7wq5yam");
+    if (gal) {
+      gal.style.setProperty("margin-top", "0", "important");
+      gal.style.setProperty("position", "relative", "important");
+    }
+
+    var backBtn = document.getElementById("comp-l9liz73b");
+    if (backBtn) {
+      backBtn.style.setProperty("margin-left", "auto", "important");
+      backBtn.style.setProperty("margin-right", "auto", "important");
+      backBtn.style.setProperty("left", "auto", "important");
+      backBtn.style.setProperty("justify-self", "center", "important");
+    }
   }
 
   function scrubWixDust() {
@@ -568,11 +706,13 @@
           columns.style.removeProperty("gap");
         }
         cols.forEach(function (col) {
-          col.style.removeProperty("width");
-          col.style.removeProperty("max-width");
-          col.style.removeProperty("flex");
-          col.style.removeProperty("flex-basis");
-          col.style.removeProperty("height");
+          [
+            "width", "max-width", "flex", "flex-basis", "height", "min-height"
+          ].forEach(function (prop) { col.style.removeProperty(prop); });
+          col.querySelectorAll("[data-hook='bgLayers'], [id^='bgLayers_']").forEach(function (bg) {
+            bg.style.removeProperty("height");
+            bg.style.removeProperty("min-height");
+          });
         });
         return;
       }
@@ -597,8 +737,57 @@
         col.style.setProperty("min-width", "0", "important");
         col.style.setProperty("flex", "0 0 auto", "important");
         col.style.setProperty("height", "auto", "important");
+        col.style.setProperty("min-height", "0", "important");
         col.style.setProperty("--column-width", "100%");
         col.style.setProperty("--column-flex", "100");
+        col.style.setProperty("--height", "auto");
+
+        col.querySelectorAll("[data-mesh-id$='inlineContent'], [data-mesh-id$='gridContainer']").forEach(function (mesh) {
+          mesh.style.setProperty("height", "auto", "important");
+          mesh.style.setProperty("min-height", "0", "important");
+          mesh.style.setProperty("display", "flex", "important");
+          mesh.style.setProperty("flex-direction", "column", "important");
+          mesh.style.setProperty("align-items", "center", "important");
+          mesh.style.setProperty("gap", "8px", "important");
+        });
+
+        col.querySelectorAll("[id^='comp-']").forEach(function (inner) {
+          inner.style.setProperty("position", "relative", "important");
+          inner.style.setProperty("left", "auto", "important");
+          inner.style.setProperty("top", "auto", "important");
+          inner.style.setProperty("width", "100%", "important");
+          inner.style.setProperty("max-width", "100%", "important");
+          inner.style.setProperty("height", "auto", "important");
+          inner.style.setProperty("min-height", "0", "important");
+        });
+
+        col.querySelectorAll("wow-image, .bgImage, img").forEach(function (media) {
+          media.style.setProperty("position", "absolute", "important");
+          media.style.setProperty("inset", "0", "important");
+          media.style.setProperty("width", "100%", "important");
+          media.style.setProperty("height", "100%", "important");
+          media.style.setProperty("object-fit", "cover", "important");
+        });
+
+        /* Media-only columns paint via absolute bgLayers — size from image ratio */
+        var mediaImg = col.querySelector("img");
+        var hasText = ((col.innerText || "").trim().length > 0);
+        if (mediaImg && !hasText) {
+          var applyMediaHeight = function () {
+            if (!mediaImg.naturalWidth) return;
+            var w = col.clientWidth || window.innerWidth || 390;
+            var h = Math.round(w * (mediaImg.naturalHeight / mediaImg.naturalWidth));
+            col.style.setProperty("height", h + "px", "important");
+            col.style.setProperty("min-height", h + "px", "important");
+            var bg = col.querySelector("[data-hook='bgLayers'], [id^='bgLayers_']");
+            if (bg) {
+              bg.style.setProperty("height", h + "px", "important");
+              bg.style.setProperty("min-height", h + "px", "important");
+            }
+          };
+          applyMediaHeight();
+          if (!mediaImg.complete) mediaImg.addEventListener("load", applyMediaHeight, { once: true });
+        }
       });
     });
 
@@ -608,12 +797,36 @@
         img.style.removeProperty("max-width");
         img.style.removeProperty("height");
         img.style.removeProperty("object-fit");
+        var wrapClear = img.closest("[id^='comp-']");
+        if (wrapClear) {
+          wrapClear.style.removeProperty("height");
+          wrapClear.style.removeProperty("min-height");
+        }
         return;
       }
       img.style.setProperty("width", "100%", "important");
       img.style.setProperty("max-width", "100%", "important");
       img.style.setProperty("height", "auto", "important");
       img.style.setProperty("object-fit", "contain", "important");
+      img.style.setProperty("position", "relative", "important");
+      img.style.setProperty("display", "block", "important");
+
+      var applyChartHeight = function () {
+        var wrap = document.getElementById("comp-kkkouh4e15") || img.closest("[id^='comp-']");
+        if (!wrap || !img.naturalWidth) return;
+        var w = wrap.clientWidth || window.innerWidth || 390;
+        var h = Math.round(w * (img.naturalHeight / img.naturalWidth));
+        wrap.style.setProperty("height", h + "px", "important");
+        wrap.style.setProperty("min-height", h + "px", "important");
+        wrap.style.setProperty("width", "100%", "important");
+        wrap.style.setProperty("max-width", "100%", "important");
+        wrap.style.setProperty("overflow", "visible", "important");
+        img.style.setProperty("width", "100%", "important");
+        img.style.setProperty("height", "100%", "important");
+        img.style.setProperty("object-fit", "contain", "important");
+      };
+      applyChartHeight();
+      if (!img.complete) img.addEventListener("load", applyChartHeight, { once: true });
     });
   }
 
@@ -621,6 +834,7 @@
     normalizeSiteShell();
     layoutProGalleries();
     layoutOrderMobileColumns();
+    linkGalleriesByTheme();
     syncChromeKosherSize();
   }
 
@@ -629,6 +843,7 @@
     buildChrome();
     lowercaseArtisticDesserts();
     composeEditorialHero();
+    composeInstagramNotice();
     composeOrderPage();
     composeContactPage();
     refreshLayout();
