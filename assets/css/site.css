@@ -17,7 +17,7 @@
   --abc-hero-carousel-bg: #f4f0ee;
   --abc-dropdown-border: rgba(28, 20, 18, 0.12);
   --abc-dropdown-hover: #f3ebe8;
-  --abc-card-label: #f6ecef;       /* soft tinted gallery label area */
+  --abc-card-label: #a22052;       /* bold gallery label area */
   --abc-radius: 22px;
 
   /* Text */
@@ -29,7 +29,7 @@
   /* Brand berry */
   --abc-berry: #a22052;            /* accent bar, CTA, headings, arrows */
   --abc-berry-hover: #c43a6c;      /* CTA hover */
-  --abc-dusty-rose: #f6ecef;       /* gallery label bars (soft tint) */
+  --abc-dusty-rose: #a22052;       /* gallery label bars (bold berry) */
 
   /* Typography */
   --abc-font-display: "Fraunces", Georgia, "Times New Roman", serif;
@@ -529,24 +529,304 @@ body,
   color: var(--abc-ink);
 }
 
-/* Header soft white */
-#SITE_HEADER,
-#SITE_HEADER .CDNoF4,
-#bgLayers_SITE_HEADER .LNYVZi {
-  --bg: var(--color_11) !important;
-  --bgctr: var(--color_11) !important;
-  background-color: var(--abc-white) !important;
+/* Kill leftover Wix chrome / motion dust */
+.abc-standalone [data-testid="screenWidthContainerBg"],
+.abc-standalone [data-testid="screenWidthContainerBgCenter"] {
+  box-shadow: none !important;
+  background: var(--abc-white) !important;
 }
 
-/* Nav links — Instrument Sans */
-#SITE_HEADER .agzDLy .VhM8Ji,
-#SITE_HEADER .wixui-dropdown-menu a,
-nav .VhM8Ji {
-  font-family: var(--abc-font-body) !important;
-  font-weight: 500 !important;
-  letter-spacing: 0.06em !important;
-  text-transform: uppercase !important;
-  font-size: 12px !important;
+.abc-standalone [id^="oldHoverBox-"],
+.abc-standalone .TvbeET,
+.abc-standalone #WIX_ADS,
+.abc-standalone #comp-kkld2ygi__more__,
+.abc-standalone li[id$="__more__"],
+.abc-standalone .H4AHlN {
+  display: none !important;
+}
+
+/* Hide entire old Wix header guts — replaced by #abc-site-chrome */
+#SITE_HEADER > .kBvIHj,
+#SITE_HEADER > .YmWgf4,
+#comp-kkks5haa,
+#comp-kkld2xkj,
+#comp-kkld2ygi,
+#comp-kkld2yginavContainer,
+#comp-kkld2ygiitemsContainer,
+wix-dropdown-menu,
+#SITE_HEADER .wixui-dropdown-menu,
+#comp-kkks5hab1,
+#comp-kkld2xko {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+#SITE_HEADER {
+  padding: 0 !important;
+  position: relative !important;
+  overflow: visible !important;
+  min-height: 0 !important;
+  height: auto !important;
+  background: var(--abc-white) !important;
+}
+
+#SITE_HEADER-placeholder {
+  display: none !important;
+  height: 0 !important;
+}
+
+#SITE_HEADER .XgJ1FR,
+#SITE_HEADER [data-mesh-id="SITE_HEADERinlineContent"],
+#SITE_HEADER [data-mesh-id="SITE_HEADERinlineContent-gridContainer"] {
+  height: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ========== Clean standalone header ========== */
+.abc-site-chrome {
+  width: 100%;
+  background: linear-gradient(180deg, #ffffff 0%, #fff8fa 100%);
+  border-bottom: 1px solid rgba(162, 32, 82, 0.1);
+  padding: 18px 20px 22px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1200;
+}
+
+.abc-chrome-top {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 78px;
+  margin-bottom: 14px;
+}
+
+.abc-chrome-brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.abc-chrome-brand img {
+  display: block;
+  width: min(360px, 78vw);
+  height: auto;
+  object-fit: contain;
+}
+
+.abc-chrome-social {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.abc-chrome-social a {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: rgba(162, 32, 82, 0.06);
+  transition: background-color 0.18s ease, transform 0.18s ease;
+}
+
+.abc-chrome-social a:hover {
+  background: rgba(162, 32, 82, 0.14);
+  transform: translateY(-1px);
+}
+
+.abc-chrome-social img {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+/* ========== Custom juicy nav (centered under girl logo) ========== */
+.abc-chrome-nav {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1000;
+}
+
+.abc-chrome-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.abc-chrome-links {
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: #fff;
+  border: 1px solid rgba(162, 32, 82, 0.14);
+  border-radius: 999px;
+  box-shadow: 0 10px 28px rgba(162, 32, 82, 0.1);
+}
+
+.abc-chrome-link,
+.abc-chrome-dropbtn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--abc-ink);
+  font-family: var(--abc-font-body);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  text-decoration: none;
+  padding: 13px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1;
+  transition: background-color 0.18s ease, color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.abc-chrome-link:hover,
+.abc-chrome-dropbtn:hover {
+  background: rgba(162, 32, 82, 0.1);
+  color: var(--abc-berry);
+  transform: translateY(-1px);
+}
+
+.abc-chrome-link.is-active,
+.abc-chrome-dropbtn.is-active,
+.abc-chrome-dropdown.is-current > .abc-chrome-dropbtn {
+  background: var(--abc-berry);
+  color: var(--abc-white);
+  box-shadow: 0 6px 16px rgba(162, 32, 82, 0.28);
+}
+
+.abc-chrome-caret {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid currentColor;
+  opacity: 0.75;
+}
+
+.abc-chrome-dropdown {
+  position: relative;
+}
+
+.abc-chrome-panel {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 240px;
+  padding: 10px;
+  background: var(--abc-white);
+  border: 1px solid rgba(162, 32, 82, 0.12);
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(28, 20, 18, 0.16);
+  z-index: 2000;
+}
+
+.abc-chrome-dropdown.is-open .abc-chrome-panel {
+  display: grid;
+  gap: 2px;
+}
+
+.abc-chrome-panel a {
+  display: block;
+  padding: 11px 14px;
+  border-radius: 12px;
+  color: var(--abc-ink);
+  text-decoration: none;
+  font-family: var(--abc-font-body);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.abc-chrome-panel a:hover,
+.abc-chrome-panel a.is-active {
+  background: rgba(162, 32, 82, 0.1);
+  color: var(--abc-berry);
+}
+
+.abc-chrome-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 28px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #c43a6c 0%, var(--abc-berry) 55%, #8e1c48 100%);
+  color: var(--abc-white) !important;
+  font-family: var(--abc-font-body);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  box-shadow: 0 10px 26px rgba(162, 32, 82, 0.32);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+
+.abc-chrome-cta:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 14px 32px rgba(162, 32, 82, 0.4);
+  filter: brightness(1.05);
+  color: var(--abc-white) !important;
+}
+
+@media (max-width: 720px) {
+  .abc-chrome-social {
+    position: static;
+    transform: none;
+    justify-content: center;
+    margin-top: 8px;
+  }
+
+  .abc-chrome-top {
+    flex-direction: column;
+  }
+
+  .abc-chrome-links {
+    border-radius: 22px;
+    gap: 4px;
+    padding: 8px;
+  }
+
+  .abc-chrome-link,
+  .abc-chrome-dropbtn,
+  .abc-chrome-cta {
+    padding: 11px 16px;
+    font-size: 13px;
+  }
+
+  .abc-chrome-panel {
+    left: 0;
+    transform: none;
+    min-width: min(280px, 80vw);
+  }
 }
 
 /* Soft thin berry accent bar under nav / kosher logo */
@@ -615,44 +895,67 @@ p.font_9,
   font-family: var(--abc-font-body) !important;
 }
 
-/* CLICK TO ORDER — soft editorial CTA */
-#comp-kkn397b6 .style-kkoa9ppz__root,
-#comp-kkn397b6 .StylableButton2545352419__root {
-  background: var(--abc-berry) !important;
-  border-radius: 4px !important;
-  transition: background-color 0.2s ease, transform 0.2s ease !important;
-}
-
-#comp-kkn397b6 .style-kkoa9ppz__root:hover,
-#comp-kkn397b6 .StylableButton2545352419__root:hover {
-  background: var(--abc-berry-hover) !important;
-}
-
-#comp-kkn397b6 .style-kkoa9ppz__root:disabled,
-#comp-kkn397b6 .StylableButton2545352419__root:disabled {
-  background: var(--abc-disabled-bg) !important;
-}
-
-#comp-kkn397b6 .StylableButton2545352419__label {
-  color: var(--abc-white) !important;
-  font-family: var(--abc-font-body) !important;
+/* artistic desserts — lowercase */
+#comp-kkngirfd,
+#comp-kkngirfd h1,
+#comp-kkngirfd .wixui-rich-text__text,
+#comp-kkngirfd span {
+  text-transform: lowercase !important;
+  font-family: var(--abc-font-display) !important;
   font-weight: 600 !important;
-  letter-spacing: 0.12em !important;
+  color: var(--abc-berry) !important;
+  letter-spacing: 0.02em !important;
 }
 
-#comp-kkn397b6 .style-kkoa9ppz__root:disabled .StylableButton2545352419__label {
-  color: var(--abc-disabled-text) !important;
+/* Hide misplaced Wix CTA — replaced by centered .abc-hero-cta */
+#comp-kkn397b6 {
+  display: none !important;
 }
 
-#comp-kkn397b6 .StylableButton2545352419__icon {
-  fill: var(--abc-white) !important;
+/* Injected hero CTA under carousel */
+.abc-hero-cta {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 981px;
+  margin: 22px auto 8px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 8;
 }
 
-#comp-kkn397b6 .style-kkoa9ppz__root:disabled .StylableButton2545352419__icon {
-  fill: var(--abc-disabled-text) !important;
+.abc-hero-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 28px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #c43a6c 0%, var(--abc-berry) 55%, #8e1c48 100%);
+  color: var(--abc-white);
+  text-decoration: none;
+  font-family: var(--abc-font-body);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  box-shadow: 0 12px 30px rgba(162, 32, 82, 0.3);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
 }
 
-/* Theme gallery cards — rounded image + soft tinted label (user reference) */
+.abc-hero-cta-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.abc-hero-cta-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 16px 36px rgba(162, 32, 82, 0.38);
+  filter: brightness(1.05);
+  color: var(--abc-white);
+}
+
+/* Theme gallery cards — bold berry titles (white text) */
 #comp-lcmrjr9o .gallery-item-container,
 #comp-lcmrjr9o .gallery-item-container.item-container-regular {
   border-radius: var(--abc-radius) !important;
@@ -673,19 +976,19 @@ p.font_9,
 #comp-lcmrjr9o .gallery-item-common-info-outer {
   margin: 0 !important;
   padding: 0 !important;
-  background-color: var(--abc-card-label) !important;
+  background-color: var(--abc-berry) !important;
 }
 
 #comp-lcmrjr9o .gallery-item-common-info,
 #comp-lcmrjr9o .gallery-item-bottom-info {
-  background-color: var(--abc-card-label) !important;
+  background-color: var(--abc-berry) !important;
   border-radius: 0 !important;
   overflow: hidden !important;
 }
 
 #comp-lcmrjr9o .gallery-item-common-info-outer [style*="background-color"],
 #comp-lcmrjr9o .gallery-item-bottom-info[style*="background-color"] {
-  background-color: var(--abc-card-label) !important;
+  background-color: var(--abc-berry) !important;
 }
 
 #comp-lcmrjr9o .info-element-text {
@@ -698,11 +1001,11 @@ p.font_9,
 #comp-lcmrjr9o .info-element-title span,
 #comp-lcmrjr9o [data-hook="item-title"],
 #comp-lcmrjr9o [data-hook="item-title"] span {
-  color: var(--abc-berry) !important;
+  color: var(--abc-white) !important;
   font-family: var(--abc-font-body) !important;
-  font-weight: 600 !important;
-  font-size: 16px !important;
-  letter-spacing: 0.01em !important;
+  font-weight: 700 !important;
+  font-size: 17px !important;
+  letter-spacing: 0.03em !important;
   text-align: center !important;
 }
 
